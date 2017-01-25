@@ -1,0 +1,12 @@
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  sha: 96fb7fa10f2f4c11ed33482a9ad7474251e5e97f
+  hooks:
+    - id: check-added-large-files
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-yaml
+    - id: trailing-whitespace
+- repo: git@github.com:hootsuite/pre-commit-php.git
+  sha: 9a3b92d6e3368c74df50d84a877fd72a61ae1f9b
+  hooks:
+    - id: php-lint
