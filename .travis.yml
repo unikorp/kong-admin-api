@@ -1,0 +1,27 @@
+language: php
+
+sudo: false
+
+git:
+    depth: 1
+
+php:
+    - 5.6
+    - 7.0
+    - 7.1
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+before_install:
+    - if [[ "$TRAVIS_PHP_VERSION" != "7.1" ]]; then phpenv config-rm xdebug.ini; fi
+
+script:
+    - composer install
+    - ./vendor/bin/phpunit
+
+after_script:
+    ## Scrutinizer
+    - if [[ "$TRAVIS_PHP_VERSION" == "7.1" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+    - if [[ "$TRAVIS_PHP_VERSION" == "7.1" ]]; then php ocular.phar --access-token="86bd9078d28a29fca0a80e4998931db4abb845fe3b681dfd099a9dddd0f8bd71" code-coverage:upload --format=php-clover ./build/logs/clover.xml; fi
