@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7574bb91c8787f7011b8813e139f7335",
+    "content-hash": "36a421803153108afccf95cf7eaf9714",
     "packages": [
         {
             "name": "clue/stream-filter",
