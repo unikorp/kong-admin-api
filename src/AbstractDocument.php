@@ -36,7 +36,7 @@ abstract class AbstractDocument implements DocumentInterface
 
         foreach ($this->getFields() as $field) {
             if (!is_null($value = $this->$field)) {
-                $document[$this->toSnakeCase($field)] = $this->$field;
+                $document[$this->toSnakeCase($field)] = $value;
             }
         }
 
