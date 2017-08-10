@@ -39,18 +39,19 @@ class Cluster extends AbstractNode
      */
     public function retrieveClusterStatus(): ResponseInterface
     {
-        return $this->get('/cluster/nodes');
+        return $this->get('/cluster/nodes/');
     }
 
     /**
      * forcibly remove a node
      *
+     * @param string $name
      * @param \Unikorp\KongAdminApi\Document\Cluster $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function forciblyRemoveANode(Document $document): ResponseInterface
+    public function forciblyRemoveANode(string $name, Document $document): ResponseInterface
     {
-        return $this->delete('/cluster', $document);
+        return $this->delete(sprintf('/cluster/nodes/%1$s', $name), $document);
     }
 }

@@ -130,7 +130,7 @@ class ClusterTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/cluster/nodes'))
+            ->with($this->equalTo('/cluster/nodes/'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -167,13 +167,13 @@ class ClusterTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/cluster'),
+                $this->equalTo('/cluster/nodes/test-cluster'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->forciblyRemoveANode($document);
+        $node->forciblyRemoveANode('test-cluster', $document);
     }
 }
