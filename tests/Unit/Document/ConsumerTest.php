@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Document;
+namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
 use Unikorp\KongAdminApi\Document\Consumer as Document;
 use PHPUnit\Framework\TestCase;
