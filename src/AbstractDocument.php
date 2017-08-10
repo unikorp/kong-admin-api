@@ -35,21 +35,9 @@ abstract class AbstractDocument implements DocumentInterface
         $document = [];
 
         foreach ($this->getFields() as $field) {
-            $value = $this->$field;
-
-            if (is_null($value)) {
-                continue;
+            if (!is_null($value = $this->$field)) {
+                $document[$this->toSnakeCase($field)] = $this->$field;
             }
-
-            if (is_array($value)) {
-                foreach (array_keys($value) as $key) {
-                    $document[sprintf('%1$s.%2$s', $field, $key)] = $value[$key];
-                }
-
-                continue;
-            }
-
-            $document[$this->toSnakeCase($field)] = $this->$field;
         }
 
         return json_encode($document);
@@ -62,7 +50,7 @@ abstract class AbstractDocument implements DocumentInterface
      *
      * @return string
      */
-    private function toSnakeCase(string $string): string
+    protected function toSnakeCase(string $string): string
     {
         return mb_strtolower(preg_replace('/(.)(?=[A-Z])/', '$1_', $string));
     }

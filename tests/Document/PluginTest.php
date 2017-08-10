@@ -211,7 +211,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\Document\Plugin::toJson
      * @covers \Unikorp\KongAdminApi\Document\Plugin::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */

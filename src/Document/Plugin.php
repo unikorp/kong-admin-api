@@ -146,4 +146,30 @@ class Plugin extends AbstractDocument
             'config',
         ];
     }
+
+    /**
+     * to json
+     *
+     * @return string
+     */
+    public function toJson(): string
+    {
+        $document = [];
+
+        foreach ($this->getFields() as $field) {
+            if (!is_null($value = $this->$field)) {
+                if (is_array($value)) {
+                    foreach (array_keys($value) as $key) {
+                        $document[$this->toSnakeCase(sprintf('%1$s.%2$s', $field, $key))] = $value[$key];
+                    }
+
+                    continue;
+                }
+
+                $document[$this->toSnakeCase($field)] = $this->$field;
+            }
+        }
+
+        return json_encode($document);
+    }
 }
