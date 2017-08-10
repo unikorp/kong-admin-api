@@ -27,22 +27,34 @@ class Api extends AbstractDocument
     protected $name = null;
 
     /**
-     * request host
-     * @var string $requestHost
+     * hosts
+     * @var string $hosts
      */
-    protected $requestHost = null;
+    protected $hosts = null;
 
     /**
-     * request path
-     * @var string $requestPath
+     * uris
+     * @var string $uris
      */
-    protected $requestPath = null;
+    protected $uris = null;
 
     /**
-     * strip request path
-     * @var bool $stripRequestPath
+     * methods
+     * @var string $methods
      */
-    protected $stripRequestPath = false;
+    protected $methods = null;
+
+    /**
+     * upstream url
+     * @var string $upstreamUrl
+     */
+    protected $upstreamUrl = null;
+
+    /**
+     * strip uri
+     * @var bool $stripUri
+     */
+    protected $stripUri = true;
 
     /**
      * preserve host
@@ -51,10 +63,40 @@ class Api extends AbstractDocument
     protected $preserveHost = false;
 
     /**
-     * upstream url
-     * @var string $upstreamUrl
+     * retries
+     * @var int $retries
      */
-    protected $upstreamUrl = null;
+    protected $retries = 5;
+
+    /**
+     * upstream connect timeout
+     * @var int $upstreamConnectTimeout
+     */
+    protected $upstreamConnectTimeout = 60000;
+
+    /**
+     * upstream send timeout
+     * @var int $upstreamSendTimeout
+     */
+    protected $upstreamSendTimeout = 60000;
+
+    /**
+     * upstream read timeout
+     * @var int $upstreamReadTimeout
+     */
+    protected $upstreamReadTimeout = 60000;
+
+    /**
+     * https only
+     * @var bool $httpsOnly
+     */
+    protected $httpsOnly = false;
+
+    /**
+     * http if terminated
+     * @var bool $httpIfTerminated
+     */
+    protected $httpIfTerminated = true;
 
     /**
      * set name
@@ -81,99 +123,75 @@ class Api extends AbstractDocument
     }
 
     /**
-     * set request host
+     * set hosts
      *
-     * @param string $requestHost
+     * @param string $hosts
      *
      * @return this
      */
-    public function setRequestHost(string $requestHost): self
+    public function setHosts(string $hosts): self
     {
-        $this->requestHost = $requestHost;
+        $this->hosts = $hosts;
 
         return $this;
     }
 
     /**
-     * get request host
+     * get hosts
      *
      * @return string
      */
-    public function getRequestHost(): string
+    public function getHosts(): string
     {
-        return $this->requestHost;
+        return $this->hosts;
     }
 
     /**
-     * set request path
+     * set uris
      *
-     * @param string $requestPath
+     * @param string $uris
      *
      * @return this
      */
-    public function setRequestPath(string $requestPath): self
+    public function setUris(string $uris): self
     {
-        $this->requestPath = $requestPath;
+        $this->uris = $uris;
 
         return $this;
     }
 
     /**
-     * get request path
+     * get uris
      *
      * @return string
      */
-    public function getRequestPath(): string
+    public function getUris(): string
     {
-        return $this->requestPath;
+        return $this->uris;
     }
 
     /**
-     * set strip request path
+     * set methods
      *
-     * @param bool $stripRequestPath
+     * @param string $methods
      *
      * @return this
      */
-    public function setStripRequestPath(bool $stripRequestPath): self
+    public function setMethods(string $methods): self
     {
-        $this->stripRequestPath = $stripRequestPath;
+        $this->methods = $methods;
 
         return $this;
     }
 
     /**
-     * get strip request path
+     * get methods
      *
-     * @return bool
+     * @return string
      */
-    public function getStripRequestPath(): bool
+    public function getMethods(): string
     {
-        return $this->stripRequestPath;
-    }
-
-    /**
-     * set preserve host
-     *
-     * @param bool $preserveHost
-     *
-     * @return this
-     */
-    public function setPreserveHost(bool $preserveHost): self
-    {
-        $this->preserveHost = $preserveHost;
-
-        return $this;
-    }
-
-    /**
-     * get preserve host
-     *
-     * @return bool
-     */
-    public function getPreserveHost(): bool
-    {
-        return $this->preserveHost;
+        return $this->methods;
     }
 
     /**
@@ -201,6 +219,198 @@ class Api extends AbstractDocument
     }
 
     /**
+     * set strip uri
+     *
+     * @param bool $stripUri
+     *
+     * @return this
+     */
+    public function setStripUri(bool $stripUri): self
+    {
+        $this->stripUri = $stripUri;
+
+        return $this;
+    }
+
+    /**
+     * get strip uri
+     *
+     * @return bool
+     */
+    public function getStripUri(): bool
+    {
+        return $this->stripUri;
+    }
+
+    /**
+     * set preserve host
+     *
+     * @param bool $preserveHost
+     *
+     * @return this
+     */
+    public function setPreserveHost(bool $preserveHost): self
+    {
+        $this->preserveHost = $preserveHost;
+
+        return $this;
+    }
+
+    /**
+     * get preserve host
+     *
+     * @return bool
+     */
+    public function getPreserveHost(): bool
+    {
+        return $this->preserveHost;
+    }
+
+    /**
+     * set retries
+     *
+     * @param int $retries
+     *
+     * @return this
+     */
+    public function setRetries(int $retries): self
+    {
+        $this->retries = $retries;
+
+        return $this;
+    }
+
+    /**
+     * get retries
+     *
+     * @return int
+     */
+    public function getRetries(): int
+    {
+        return $this->retries;
+    }
+
+    /**
+     * set upstream connect timeout
+     *
+     * @param int $upstreamConnectTimeout
+     *
+     * @return this
+     */
+    public function setUpstreamConnectTimeout(int $upstreamConnectTimeout): self
+    {
+        $this->upstreamConnectTimeout = $upstreamConnectTimeout;
+
+        return $this;
+    }
+
+    /**
+     * get upstream connect timeout
+     *
+     * @return int
+     */
+    public function getUpstreamConnectTimeout(): int
+    {
+        return $this->upstreamConnectTimeout;
+    }
+
+    /**
+     * set upstream send timeout
+     *
+     * @param int $upstreamSendTimeout
+     *
+     * @return this
+     */
+    public function setUpstreamSendTimeout(int $upstreamSendTimeout): self
+    {
+        $this->upstreamSendTimeout = $upstreamSendTimeout;
+
+        return $this;
+    }
+
+    /**
+     * get upstream send timeout
+     *
+     * @return int
+     */
+    public function getUpstreamSendTimeout(): int
+    {
+        return $this->upstreamSendTimeout;
+    }
+
+    /**
+     * set upstream read timeout
+     *
+     * @param int $upstreamReadTimeout
+     *
+     * @return this
+     */
+    public function setUpstreamReadTimeout(int $upstreamReadTimeout): self
+    {
+        $this->upstreamReadTimeout = $upstreamReadTimeout;
+
+        return $this;
+    }
+
+    /**
+     * get upstream read timeout
+     *
+     * @return int
+     */
+    public function getUpstreamReadTimeout(): int
+    {
+        return $this->upstreamReadTimeout;
+    }
+
+    /**
+     * set https only
+     *
+     * @param bool $httpsOnly
+     *
+     * @return this
+     */
+    public function setHttpsOnly(bool $httpsOnly): self
+    {
+        $this->httpsOnly = $httpsOnly;
+
+        return $this;
+    }
+
+    /**
+     * get https only
+     *
+     * @return bool
+     */
+    public function getHttpsOnly(): bool
+    {
+        return $this->httpsOnly;
+    }
+
+    /**
+     * set http if terminated
+     *
+     * @param bool $httpIfTerminated
+     *
+     * @return this
+     */
+    public function setHttpIfTerminated(bool $httpIfTerminated): self
+    {
+        $this->httpIfTerminated = $httpIfTerminated;
+
+        return $this;
+    }
+
+    /**
+     * get http if terminated
+     *
+     * @return bool
+     */
+    public function getHttpIfTerminated(): bool
+    {
+        return $this->httpIfTerminated;
+    }
+
+    /**
      * get fields
      *
      * @return array
@@ -209,11 +419,18 @@ class Api extends AbstractDocument
     {
         return [
             'name',
-            'requestHost',
-            'requestPath',
-            'stripRequestPath',
-            'preserveHost',
+            'hosts',
+            'uris',
+            'methods',
             'upstreamUrl',
+            'stripUri',
+            'preserveHost',
+            'retries',
+            'upstreamConnectTimeout',
+            'upstreamSendTimeout',
+            'upstreamReadTimeout',
+            'httpsOnly',
+            'httpIfTerminated',
         ];
     }
 }

@@ -11,15 +11,15 @@
 
 namespace Unikorp\KongAdminApi\Tests\Node;
 
-use Unikorp\KongAdminApi\Node\Cluster as Node;
+use Unikorp\KongAdminApi\Node\Target as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * cluster test
+ * target test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class ClusterTest extends TestCase
+class TargetTest extends TestCase
 {
     /**
      * client
@@ -82,70 +82,14 @@ class ClusterTest extends TestCase
     }
 
     /**
-     * test cluster information
+     * test add target
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::clusterInformation
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
+     * @covers \Unikorp\KongAdminApi\Node\Target::addTarget
+     * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testClusterInformation()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('/cluster'))
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->clusterInformation();
-    }
-
-    /**
-     * test retrieve cluster status
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::retrieveClusterStatus
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testRetrieveClusterStatus()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('/cluster/nodes'))
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->retrieveClusterStatus();
-    }
-
-    /**
-     * test forcibly remove a node
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::forciblyRemoveANode
-     * @covers \Unikorp\KongAdminApi\AbstractNode::delete
-     */
-    public function testForciblyRemoveANode()
+    public function testAddTarget()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -153,7 +97,7 @@ class ClusterTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Cluster');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Target');
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -163,17 +107,105 @@ class ClusterTest extends TestCase
             ->method('toJson')
             ->will($this->returnValue('{"test":true}'));
 
-        // stub `delete` method from `http client` mock
+        // stub `post` method from `http client` mock
         $this->httpClient->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
-                $this->equalTo('/cluster'),
+                $this->equalTo('/upstreams/test-upstream/targets'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->forciblyRemoveANode($document);
+        $node->addTarget('test-upstream', $document);
+    }
+
+    /**
+     * test list targets
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Target::listTargets
+     * @covers \Unikorp\KongAdminApi\AbstractNode::get
+     */
+    public function testListTargets()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `get` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo('/upstreams/test-upstream/targets'))
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->listTargets('test-upstream');
+    }
+
+    /**
+     * test list active targets
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Target::listActiveTargets
+     * @covers \Unikorp\KongAdminApi\AbstractNode::get
+     */
+    public function testListActiveTargets()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `get` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo('/upstreams/test-upstream/targets/active'))
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->listActiveTargets('test-upstream');
+    }
+
+    /**
+     * test delete target
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Target::deleteTarget
+     * @covers \Unikorp\KongAdminApi\AbstractNode::delete
+     */
+    public function testDeleteTarget()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `get` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('delete')
+            ->with(
+                $this->equalTo('/upstreams/test-upstream/targets/test-target'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('[]')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->deleteTarget('test-upstream', 'test-target');
     }
 }
