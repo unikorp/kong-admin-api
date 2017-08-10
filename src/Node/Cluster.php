@@ -39,7 +39,7 @@ class Cluster extends AbstractNode
      */
     public function retrieveClusterStatus(): ResponseInterface
     {
-        return $this->get('/cluster/nodes');
+        return $this->get('/cluster/nodes/');
     }
 
     /**

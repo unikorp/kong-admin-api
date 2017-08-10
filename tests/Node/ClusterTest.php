@@ -130,7 +130,7 @@ class ClusterTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/cluster/nodes'))
+            ->with($this->equalTo('/cluster/nodes/'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
