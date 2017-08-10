@@ -23,13 +23,23 @@ use Unikorp\KongAdminApi\Document\Cluster as Document;
 class Cluster extends AbstractNode
 {
     /**
+     * cluster information
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function clusterInformation(): ResponseInterface
+    {
+        return $this->get('/cluster');
+    }
+
+    /**
      * retrieve cluster status
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function retrieveClusterStatus(): ResponseInterface
     {
-        return $this->get('/cluster');
+        return $this->get('/cluster/nodes');
     }
 
     /**

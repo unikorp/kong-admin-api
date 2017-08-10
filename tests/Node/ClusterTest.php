@@ -82,6 +82,34 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * test cluster information
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Cluster::clusterInformation
+     * @covers \Unikorp\KongAdminApi\AbstractNode::get
+     */
+    public function testClusterInformation()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `get` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo('/cluster'))
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->clusterInformation();
+    }
+
+    /**
      * test retrieve cluster status
      *
      * @return void
@@ -102,7 +130,7 @@ class ClusterTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/cluster'))
+            ->with($this->equalTo('/cluster/nodes'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
