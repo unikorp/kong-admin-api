@@ -50,7 +50,7 @@ abstract class AbstractDocument implements DocumentInterface
      *
      * @return string
      */
-    private function toSnakeCase(string $string): string
+    protected function toSnakeCase(string $string): string
     {
         return mb_strtolower(preg_replace('/(.)(?=[A-Z])/', '$1_', $string));
     }
