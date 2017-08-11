@@ -91,16 +91,9 @@ class ConfiguratorTest extends TestCase
      */
     public function testSetBaseUri()
     {
-        // reflect `configurator`
-        $reflectionClass = new \ReflectionClass($this->configurator);
-
-        // set `base uri` property from `configurator` accessible
-        $reflectionProperty = $reflectionClass->getProperty('baseUri');
-        $reflectionProperty->setAccessible(true);
-
         // assert
         $this->configurator->setBaseUri('http://example.com:8001/test');
-        $this->assertSame('http://example.com:8001/test', $reflectionProperty->getValue($this->configurator));
+        $this->assertSame('http://example.com:8001/test', $this->readAttribute($this->configurator, 'baseUri'));
     }
 
     /**
@@ -122,6 +115,49 @@ class ConfiguratorTest extends TestCase
         // assert
         $reflectionProperty->setValue($this->configurator, 'http://example.com:8001/test');
         $this->assertSame('http://example.com:8001/test', $this->configurator->getBaseUri());
+    }
+
+    /**
+     * test set headers
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Configurator::setHeaders
+     */
+    public function testSetHeaders()
+    {
+        // assert
+        $this->configurator->setHeaders([
+            'Test' => 'test',
+        ]);
+        $this->assertSame([
+            'Test' => 'test',
+        ], $this->readAttribute($this->configurator, 'headers'));
+    }
+
+    /**
+     * test get headers
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Configurator::getHeaders
+     */
+    public function testGetHeaders()
+    {
+        // reflect `configurator`
+        $reflectionClass = new \ReflectionClass($this->configurator);
+
+        // set `base uri` property from `configurator` accessible
+        $reflectionProperty = $reflectionClass->getProperty('headers');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->configurator, [
+            'Test' => 'test',
+        ]);
+        $this->assertSame([
+            'Test' => 'test',
+        ], $this->configurator->getHeaders());
     }
 
     /**
