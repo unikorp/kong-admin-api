@@ -43,6 +43,13 @@ class ClientTest extends TestCase
         $this->configurator->expects($this->once())
             ->method('getBaseUri')
             ->will($this->returnValue('http://example.com:8001/test'));
+
+        // stub `get base uri` method from `configurator` mock
+        $this->configurator->expects($this->once())
+            ->method('getHeaders')
+            ->will($this->returnValue([
+                'Test' => 'test',
+            ]));
     }
 
     /**
@@ -116,29 +123,40 @@ class ClientTest extends TestCase
         // create new `client`
         $client = new Client($this->configurator);
 
-        // reflect `client`
-        $reflectionClass = new \ReflectionClass($client);
-
-        // set `plugins` property from `client` accessible
-        $reflectionProperty = $reflectionClass->getProperty('plugins');
-        $reflectionProperty->setAccessible(true);
-
         // get `add host plugin`
-        $addHostPlugin = $reflectionProperty->getValue($client)[0];
-
-        // reflect `add host plugin`
-        $reflectionClass = new \ReflectionClass($addHostPlugin);
-
-        // set `host` property from `add host plugin` accessible
-        $reflectionProperty = $reflectionClass->getProperty('host');
-        $reflectionProperty->setAccessible(true);
+        $plugin = $this->readAttribute($client, 'plugins')[0];
 
         // get `host`
-        $host = $reflectionProperty->getValue($addHostPlugin);
+        $host = $this->readAttribute($plugin, 'host');
 
         // asserts
-        $this->assertInstanceOf('\Http\Client\Common\Plugin\addHostPlugin', $addHostPlugin);
+        $this->assertInstanceOf('\Http\Client\Common\Plugin\AddHostPlugin', $plugin);
         $this->assertSame('http://example.com:8001/test', (string) $host);
+    }
+
+    /**
+     * test construct add header set plugin
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Client::__construct
+     */
+    public function testConstructAddHeaderSetPlugin()
+    {
+        // create new `client`
+        $client = new Client($this->configurator);
+
+        // get `add host plugin`
+        $plugin = $this->readAttribute($client, 'plugins')[1];
+
+        // get `headers`
+        $headers = $this->readAttribute($plugin, 'headers');
+
+        // asserts
+        $this->assertInstanceOf('\Http\Client\Common\Plugin\HeaderSetPlugin', $plugin);
+        $this->assertSame([
+            'Test' => 'test',
+        ], $headers);
     }
 
     /**

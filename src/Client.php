@@ -67,6 +67,8 @@ class Client
         $this->plugins[] = new Plugin\AddHostPlugin(
             UriFactoryDiscovery::find()->createUri($configurator->getBaseUri())
         );
+
+        $this->plugins[] = new Plugin\HeaderSetPlugin($configurator->getHeaders());
     }
 
     /**
