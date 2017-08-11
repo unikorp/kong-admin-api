@@ -27,6 +27,12 @@ class Configurator implements ConfiguratorInterface
     private $baseUri = null;
 
     /**
+     * headers
+     * @var array $headers
+     */
+    private $headers = [];
+
+    /**
      * nodes
      * @var array $nodes
      */
@@ -61,11 +67,33 @@ class Configurator implements ConfiguratorInterface
     /**
      * get base uri
      *
-     * @return string $baseUri
+     * @return string
      */
     public function getBaseUri(): string
     {
         return $this->baseUri;
+    }
+
+    /**
+     * set headers
+     *
+     * @param array $headers
+     *
+     * @return void
+     */
+    public function setHeaders(array $headers): void
+    {
+        $this->headers = $headers;
+    }
+
+    /**
+     * get headers
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 
     /**

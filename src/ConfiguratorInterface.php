@@ -26,6 +26,13 @@ interface ConfiguratorInterface
     public function getBaseUri(): string;
 
     /**
+     * get headers
+     *
+     * @return array
+     */
+    public function getHeaders(): array;
+
+    /**
      * get node
      *
      * @param string $name
