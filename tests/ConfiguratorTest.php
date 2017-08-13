@@ -71,15 +71,23 @@ class ConfiguratorTest extends TestCase
         // assert
         $nodes = $reflectionProperty->getValue($this->configurator);
         $this->assertArrayHasKey('api', $nodes);
+        $this->assertArrayHasKey('certificate', $nodes);
         $this->assertArrayHasKey('cluster', $nodes);
         $this->assertArrayHasKey('consumer', $nodes);
         $this->assertArrayHasKey('information', $nodes);
         $this->assertArrayHasKey('plugin', $nodes);
+        $this->assertArrayHasKey('sni', $nodes);
+        $this->assertArrayHasKey('target', $nodes);
+        $this->assertArrayHasKey('upstream', $nodes);
         $this->assertSame(Node\Api::class, $nodes['api']);
+        $this->assertSame(Node\Certificate::class, $nodes['certificate']);
         $this->assertSame(Node\Cluster::class, $nodes['cluster']);
         $this->assertSame(Node\Consumer::class, $nodes['consumer']);
         $this->assertSame(Node\Information::class, $nodes['information']);
         $this->assertSame(Node\Plugin::class, $nodes['plugin']);
+        $this->assertSame(Node\Sni::class, $nodes['sni']);
+        $this->assertSame(Node\Target::class, $nodes['target']);
+        $this->assertSame(Node\Upstream::class, $nodes['upstream']);
     }
 
     /**
