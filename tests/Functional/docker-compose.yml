@@ -1,0 +1,33 @@
+version: "3"
+services:
+    db:
+        image: postgres:9.4
+        environment:
+            - POSTGRES_USER=kong
+            - POSTGRES_DB=kong
+        expose:
+            - 5432
+
+    kong:
+        image: kong:0.10
+        depends_on:
+            - db
+        environment:
+            - KONG_DATABASE=postgres
+            - KONG_PG_HOST=db
+        labels:
+            - "traefik.frontend.rule=Host:test.kong.localhost"
+            - "traefik.port=8001"
+        links:
+            - db
+        restart: unless-stopped
+
+    proxy:
+        image: traefik
+        command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+        ports:
+            - 80:80
+            - 8080:8080
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /dev/null:/traefik.toml
