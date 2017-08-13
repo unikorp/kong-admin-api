@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Node;
+namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
 use Unikorp\KongAdminApi\Node\Cluster as Node;
 use PHPUnit\Framework\TestCase;

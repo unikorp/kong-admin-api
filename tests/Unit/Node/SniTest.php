@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Node;
+namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Node\Api as Node;
+use Unikorp\KongAdminApi\Node\Sni as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * api test
+ * sni test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class ApiTest extends TestCase
+class SniTest extends TestCase
 {
     /**
      * client
@@ -82,14 +82,14 @@ class ApiTest extends TestCase
     }
 
     /**
-     * test add api
+     * test add sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::addApi
+     * @covers \Unikorp\KongAdminApi\Node\Sni::addSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddApi()
+    public function testAddSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -97,7 +97,7 @@ class ApiTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Api');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Sni');
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -111,25 +111,25 @@ class ApiTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/apis/'),
+                $this->equalTo('/snis/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addApi($document);
+        $node->addSni($document);
     }
 
     /**
-     * test retrieve api
+     * test retrieve sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::retrieveApi
+     * @covers \Unikorp\KongAdminApi\Node\Sni::retrieveSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrieveApi()
+    public function testRetrieveSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -142,22 +142,22 @@ class ApiTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/apis/test-api'))
+            ->with($this->equalTo('/snis/test-sni'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrieveApi('test-api');
+        $node->retrieveSni('test-sni');
     }
 
     /**
-     * test list apis
+     * test list snis
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::listApis
+     * @covers \Unikorp\KongAdminApi\Node\Sni::listSnis
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListApis()
+    public function testListSnis()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -170,22 +170,22 @@ class ApiTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/apis/'))
+            ->with($this->equalTo('/snis/'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listApis();
+        $node->listSnis();
     }
 
     /**
-     * test update api
+     * test update sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::updateApi
+     * @covers \Unikorp\KongAdminApi\Node\Sni::updateSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::patch
      */
-    public function testUpdateApi()
+    public function testUpdateSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -196,7 +196,7 @@ class ApiTest extends TestCase
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Api');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Sni');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
@@ -207,25 +207,25 @@ class ApiTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('/apis/test-api'),
+                $this->equalTo('/snis/test-sni'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateApi('test-api', $document);
+        $node->updateSni('test-sni', $document);
     }
 
     /**
-     * test update or create api
+     * test update or create sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::updateOrCreateApi
+     * @covers \Unikorp\KongAdminApi\Node\Sni::updateOrCreateSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::put
      */
-    public function testUpdateOrCreateApi()
+    public function testUpdateOrCreateSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -236,7 +236,7 @@ class ApiTest extends TestCase
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Api');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Sni');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
@@ -247,25 +247,25 @@ class ApiTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('put')
             ->with(
-                $this->equalTo('/apis/'),
+                $this->equalTo('/snis/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateOrCreateApi($document);
+        $node->updateOrCreateSni($document);
     }
 
     /**
-     * test delete api
+     * test delete sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::deleteApi
+     * @covers \Unikorp\KongAdminApi\Node\Sni::deleteSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeleteApi()
+    public function testDeleteSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -279,13 +279,13 @@ class ApiTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/apis/test-api'),
+                $this->equalTo('/snis/test-sni'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deleteApi('test-api');
+        $node->deleteSni('test-sni');
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests;
+namespace Unikorp\KongAdminApi\Tests\Unit;
 
 use Unikorp\KongAdminApi\Client;
 use PHPUnit\Framework\TestCase;

@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Node;
+namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Node\Plugin as Node;
+use Unikorp\KongAdminApi\Node\Upstream as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * plugin test
+ * upstream test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class PluginTest extends TestCase
+class UpstreamTest extends TestCase
 {
     /**
      * client
@@ -82,14 +82,14 @@ class PluginTest extends TestCase
     }
 
     /**
-     * test add plugin
+     * test add upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::addPlugin
+     * @covers \Unikorp\KongAdminApi\Node\Upstream::addUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddPlugin()
+    public function testAddUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -97,7 +97,7 @@ class PluginTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Plugin');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Upstream');
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -111,25 +111,25 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/apis/test-plugin/plugins/'),
+                $this->equalTo('/upstreams/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addPlugin('test-plugin', $document);
+        $node->addUpstream($document);
     }
 
     /**
-     * test retrieve plugin
+     * test retrieve upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrievePlugin
+     * @covers \Unikorp\KongAdminApi\Node\Upstream::retrieveUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrievePlugin()
+    public function testRetrieveUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -142,22 +142,22 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/plugins/test-plugin'))
+            ->with($this->equalTo('/upstreams/test-upstream'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrievePlugin('test-plugin');
+        $node->retrieveUpstream('test-upstream');
     }
 
     /**
-     * test list all plugins
+     * test list upstreams
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::listAllPlugins
+     * @covers \Unikorp\KongAdminApi\Node\Upstream::listUpstreams
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListAllPlugins()
+    public function testListUpstreams()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -170,130 +170,102 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/plugins/'))
+            ->with($this->equalTo('/upstreams/'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listAllPlugins();
+        $node->listUpstreams();
     }
 
     /**
-     * test list plugins per api
+     * test update upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::listPluginsPerApi
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testListPluginsPerApi()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('/apis/test-api/plugins/'))
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->listPluginsPerApi('test-api');
-    }
-
-    /**
-     * test update plugin
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::updatePlugin
+     * @covers \Unikorp\KongAdminApi\Node\Upstream::updateUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::patch
      */
-    public function testUpdatePlugin()
+    public function testUpdateUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
             ->method('getHttpClient')
             ->will($this->returnValue($this->httpClient));
 
-        // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Plugin');
-
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // mock `document`
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Upstream');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
             ->method('toJson')
             ->will($this->returnValue('{"test":true}'));
 
-        // stub `patch` method from `http client` mock
+        // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('/apis/test-api/plugins/id-plugin'),
+                $this->equalTo('/upstreams/test-upstream'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updatePlugin('test-api', 'id-plugin', $document);
+        $node->updateUpstream('test-upstream', $document);
     }
 
     /**
-     * test update or add plugin
+     * test update or create upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::updateOrAddPlugin
+     * @covers \Unikorp\KongAdminApi\Node\Upstream::updateOrCreateUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::put
      */
-    public function testUpdateOrAddPlugin()
+    public function testUpdateOrCreateUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
             ->method('getHttpClient')
             ->will($this->returnValue($this->httpClient));
 
-        // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Plugin');
-
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // mock `document`
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Upstream');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
             ->method('toJson')
             ->will($this->returnValue('{"test":true}'));
 
-        // stub `put` method from `http client` mock
+        // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('put')
             ->with(
-                $this->equalTo('/apis/test-api/plugins/'),
+                $this->equalTo('/upstreams/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateOrAddPlugin('test-api', $document);
+        $node->updateOrCreateUpstream($document);
     }
 
     /**
-     * test delete plugin
+     * test delete upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::deletePlugin
+     * @covers \Unikorp\KongAdminApi\Node\Upstream::deleteUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeletePlugin()
+    public function testDeleteUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -303,73 +275,17 @@ class PluginTest extends TestCase
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
-        // stub `delete` method from `http client` mock
+        // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/apis/test-api/plugins/id-plugin'),
+                $this->equalTo('/upstreams/test-upstream'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deletePlugin('test-api', 'id-plugin');
-    }
-
-    /**
-     * test retrieve enabled plugin
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrieveEnabledPlugin
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testRetrieveEnabledPlugin()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('/plugins/enabled'))
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->retrieveEnabledPlugin();
-    }
-
-    /**
-     * test retrieve plugin schema
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrievePluginSchema
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testRetrievePluginSchema()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('/plugins/schema/test-plugin'))
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->retrievePluginSchema('test-plugin');
+        $node->deleteUpstream('test-upstream');
     }
 }

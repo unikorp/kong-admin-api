@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Node;
+namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Node\Target as Node;
+use Unikorp\KongAdminApi\Node\Consumer as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * target test
+ * consumer test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class TargetTest extends TestCase
+class ConsumerTest extends TestCase
 {
     /**
      * client
@@ -82,14 +82,14 @@ class TargetTest extends TestCase
     }
 
     /**
-     * test add target
+     * test create consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::addTarget
+     * @covers \Unikorp\KongAdminApi\Node\Consumer::createConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddTarget()
+    public function testCreateConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -97,7 +97,7 @@ class TargetTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Target');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Consumer');
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -111,25 +111,25 @@ class TargetTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/upstreams/test-upstream/targets'),
+                $this->equalTo('/consumers/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addTarget('test-upstream', $document);
+        $node->createConsumer($document);
     }
 
     /**
-     * test list targets
+     * test retrieve consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::listTargets
+     * @covers \Unikorp\KongAdminApi\Node\Consumer::retrieveConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListTargets()
+    public function testRetrieveConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -142,22 +142,22 @@ class TargetTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/upstreams/test-upstream/targets'))
+            ->with($this->equalTo('/consumers/test-consumer'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listTargets('test-upstream');
+        $node->retrieveConsumer('test-consumer');
     }
 
     /**
-     * test list active targets
+     * test list consumers
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::listActiveTargets
+     * @covers \Unikorp\KongAdminApi\Node\Consumer::listConsumers
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListActiveTargets()
+    public function testListConsumers()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -170,22 +170,102 @@ class TargetTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/upstreams/test-upstream/targets/active'))
+            ->with($this->equalTo('/consumers/'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listActiveTargets('test-upstream');
+        $node->listConsumers();
     }
 
     /**
-     * test delete target
+     * test update consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::deleteTarget
+     * @covers \Unikorp\KongAdminApi\Node\Consumer::updateConsumer
+     * @covers \Unikorp\KongAdminApi\AbstractNode::patch
+     */
+    public function testUpdateConsumer()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `document`
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Consumer');
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `patch` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('/consumers/test-consumer'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->updateConsumer('test-consumer', $document);
+    }
+
+    /**
+     * test update or create consumer
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Consumer::updateOrCreateConsumer
+     * @covers \Unikorp\KongAdminApi\AbstractNode::put
+     */
+    public function testUpdateOrCreateConsumer()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `document`
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Consumer');
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `put` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('put')
+            ->with(
+                $this->equalTo('/consumers/'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->updateOrCreateConsumer($document);
+    }
+
+    /**
+     * test delete consumer
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Consumer::deleteConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeleteTarget()
+    public function testDeleteConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -195,17 +275,17 @@ class TargetTest extends TestCase
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
-        // stub `get` method from `http client` mock
+        // stub `delete` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/upstreams/test-upstream/targets/test-target'),
+                $this->equalTo('/consumers/test-consumer'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deleteTarget('test-upstream', 'test-target');
+        $node->deleteConsumer('test-consumer');
     }
 }

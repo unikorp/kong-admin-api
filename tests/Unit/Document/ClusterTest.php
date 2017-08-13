@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Document;
+namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Sni as Document;
+use Unikorp\KongAdminApi\Document\Cluster as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * sni test
+ * cluster test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class SniTest extends TestCase
+class ClusterTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Sni $document
+     * @var \Unikorp\KongAdminApi\Document\Cluster $document
      */
     private $document = null;
 
@@ -56,7 +56,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::setName
+     * @covers \Unikorp\KongAdminApi\Document\Cluster::setName
      */
     public function testSetName()
     {
@@ -70,7 +70,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getName
+     * @covers \Unikorp\KongAdminApi\Document\Cluster::getName
      */
     public function testGetName()
     {
@@ -87,58 +87,19 @@ class SniTest extends TestCase
     }
 
     /**
-     * test set ssl certificate id
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::setSslCertificateId
-     */
-    public function testSetSslCertificateId()
-    {
-        // asserts
-        $this->document->setSslCertificateId('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'sslCertificateId'));
-    }
-
-    /**
-     * test get ssl certificate id
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getSslCertificateId
-     */
-    public function testGetSslCertificateId()
-    {
-        // reflect `document`
-        $reflectionClass = new \ReflectionClass($this->document);
-
-        // set `sslCertificateId` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('sslCertificateId');
-        $reflectionProperty->setAccessible(true);
-
-        // assert
-        $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getSslCertificateId());
-    }
-
-    /**
      * test to json
      *
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getFields
+     * @covers \Unikorp\KongAdminApi\Document\Cluster::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
     {
         $this->document
-            ->setName('name')
-            ->setSslCertificateId('sslCertificateId');
+            ->setName('name');
 
-        $this->assertSame(
-            '{"name":"name","ssl_certificate_id":"sslCertificateId"}',
-            $this->document->toJson()
-        );
+        $this->assertSame('{"name":"name"}', $this->document->toJson());
     }
 }

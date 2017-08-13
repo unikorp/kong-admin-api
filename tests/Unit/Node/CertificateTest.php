@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Unikorp\KongAdminApi\Tests\Node;
+namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Node\Sni as Node;
+use Unikorp\KongAdminApi\Node\Certificate as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * sni test
+ * certificate test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class SniTest extends TestCase
+class CertificateTest extends TestCase
 {
     /**
      * client
@@ -82,14 +82,14 @@ class SniTest extends TestCase
     }
 
     /**
-     * test add sni
+     * test add certificate
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::addSni
+     * @covers \Unikorp\KongAdminApi\Node\Certificate::addCertificate
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddSni()
+    public function testAddCertificate()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -97,7 +97,7 @@ class SniTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Sni');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Certificate');
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -111,25 +111,25 @@ class SniTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/snis/'),
+                $this->equalTo('/certificates/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addSni($document);
+        $node->addCertificate($document);
     }
 
     /**
-     * test retrieve sni
+     * test retrieve certificate
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::retrieveSni
+     * @covers \Unikorp\KongAdminApi\Node\Certificate::retrieveCertificate
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrieveSni()
+    public function testRetrieveCertificate()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -142,22 +142,22 @@ class SniTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/snis/test-sni'))
+            ->with($this->equalTo('/certificates/test-certificate'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrieveSni('test-sni');
+        $node->retrieveCertificate('test-certificate');
     }
 
     /**
-     * test list snis
+     * test list certificates
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::listSnis
+     * @covers \Unikorp\KongAdminApi\Node\Certificate::listCertificates
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListSnis()
+    public function testListCertificates()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -170,22 +170,22 @@ class SniTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/snis/'))
+            ->with($this->equalTo('/certificates/'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listSnis();
+        $node->listCertificates();
     }
 
     /**
-     * test update sni
+     * test update certificate
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::updateSni
+     * @covers \Unikorp\KongAdminApi\Node\Certificate::updateCertificate
      * @covers \Unikorp\KongAdminApi\AbstractNode::patch
      */
-    public function testUpdateSni()
+    public function testUpdateCertificate()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -196,7 +196,7 @@ class SniTest extends TestCase
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Sni');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Certificate');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
@@ -207,25 +207,25 @@ class SniTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('/snis/test-sni'),
+                $this->equalTo('/certificates/test-certificate'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateSni('test-sni', $document);
+        $node->updateCertificate('test-certificate', $document);
     }
 
     /**
-     * test update or create sni
+     * test update or create certificate
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::updateOrCreateSni
+     * @covers \Unikorp\KongAdminApi\Node\Certificate::updateOrCreateCertificate
      * @covers \Unikorp\KongAdminApi\AbstractNode::put
      */
-    public function testUpdateOrCreateSni()
+    public function testUpdateOrCreateCertificate()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -236,7 +236,7 @@ class SniTest extends TestCase
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Sni');
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Certificate');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
@@ -247,25 +247,25 @@ class SniTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('put')
             ->with(
-                $this->equalTo('/snis/'),
+                $this->equalTo('/certificates/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateOrCreateSni($document);
+        $node->updateOrCreateCertificate($document);
     }
 
     /**
-     * test delete sni
+     * test delete certificate
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::deleteSni
+     * @covers \Unikorp\KongAdminApi\Node\Certificate::deleteCertificate
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeleteSni()
+    public function testDeleteCertificate()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -279,13 +279,13 @@ class SniTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/snis/test-sni'),
+                $this->equalTo('/certificates/test-certificate'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deleteSni('test-sni');
+        $node->deleteCertificate('test-certificate');
     }
 }
