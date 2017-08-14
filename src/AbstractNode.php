@@ -81,6 +81,8 @@ abstract class AbstractNode implements NodeInterface
      */
     protected function put($endpoint, DocumentInterface $document = null)
     {
+        $document->setCreatedAt(time());
+
         return $this->client->getHttpClient()->put(
             $endpoint,
             self::JSON_CONTENT_TYPE,
