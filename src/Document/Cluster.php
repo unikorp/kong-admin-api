@@ -27,6 +27,12 @@ class Cluster extends AbstractDocument
     protected $name = null;
 
     /**
+     * address
+     * @var string $address
+     */
+    protected $address = null;
+
+    /**
      * set name
      *
      * @param string $name
@@ -51,6 +57,30 @@ class Cluster extends AbstractDocument
     }
 
     /**
+     * set address
+     *
+     * @param string $address
+     *
+     * @return this
+     */
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * get address
+     *
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    /**
      * get fields
      *
      * @return array
@@ -59,6 +89,7 @@ class Cluster extends AbstractDocument
     {
         return [
             'name',
+            'address',
         ];
     }
 }
