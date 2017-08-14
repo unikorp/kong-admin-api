@@ -197,6 +197,7 @@ class UpstreamTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Upstream::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -211,6 +212,30 @@ class UpstreamTest extends TestCase
         $this->assertSame(
             '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3],"created_at":42}',
             $this->document->toJson()
+        );
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Upstream::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setName('name')
+            ->setSlots(65536)
+            ->setOrderlist([1, 2, 7, 9, 6, 3])
+            ->setCreatedAt(42);
+
+        $this->assertSame(
+            'name=name&slots=65536&orderlist%5B0%5D=1&orderlist%5B1%5D=2&orderlist%5B2%5D=7&orderlist%5B3%5D=9&orderlist%5B4%5D=6&orderlist%5B5%5D=3&created_at=42',
+            $this->document->toQueryString()
         );
     }
 }

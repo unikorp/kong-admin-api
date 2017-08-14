@@ -162,6 +162,7 @@ class SniTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Sni::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -175,6 +176,29 @@ class SniTest extends TestCase
         $this->assertSame(
             '{"name":"name","ssl_certificate_id":"sslCertificateId","created_at":42}',
             $this->document->toJson()
+        );
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Sni::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setName('name')
+            ->setSslCertificateId('sslCertificateId')
+            ->setCreatedAt(42);
+
+        $this->assertSame(
+            'name=name&ssl_certificate_id=sslCertificateId&created_at=42',
+            $this->document->toQueryString()
         );
     }
 }

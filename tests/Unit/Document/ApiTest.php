@@ -547,6 +547,7 @@ class ApiTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Api::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -571,6 +572,40 @@ class ApiTest extends TestCase
         $this->assertSame(
             '{"name":"name","hosts":"hosts","uris":"uris","methods":"methods","upstream_url":"upstreamUrl","strip_uri":false,"preserve_host":true,"retries":10,"upstream_connect_timeout":10000,"upstream_send_timeout":10000,"upstream_read_timeout":10000,"https_only":true,"http_if_terminated":false,"created_at":42}',
             $this->document->toJson()
+        );
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Api::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setName('name')
+            ->setHosts('hosts')
+            ->setUris('uris')
+            ->setMethods('methods')
+            ->setUpstreamUrl('upstreamUrl')
+            ->setStripUri(false)
+            ->setPreserveHost(true)
+            ->setRetries(10)
+            ->setUpstreamConnectTimeout(10000)
+            ->setUpstreamSendTimeout(10000)
+            ->setUpstreamReadTimeout(10000)
+            ->setHttpsOnly(true)
+            ->setHttpIfTerminated(false)
+            ->setCreatedAt(42);
+
+        $this->assertSame(
+            'name=name&hosts=hosts&uris=uris&methods=methods&upstream_url=upstreamUrl&strip_uri=0&preserve_host=1&retries=10&upstream_connect_timeout=10000&upstream_send_timeout=10000&upstream_read_timeout=10000&https_only=1&http_if_terminated=0&created_at=42',
+            $this->document->toQueryString()
         );
     }
 }

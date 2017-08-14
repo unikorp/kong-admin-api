@@ -92,6 +92,7 @@ class InformationTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Information::getFields
      */
     public function testToJson()
@@ -99,5 +100,21 @@ class InformationTest extends TestCase
         $this->document->setCreatedAt(42);
 
         $this->assertSame('{"created_at":42}', $this->document->toJson());
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Information::getFields
+     */
+    public function testToQueryString()
+    {
+        $this->document->setCreatedAt(42);
+
+        $this->assertSame('created_at=42', $this->document->toQueryString());
     }
 }
