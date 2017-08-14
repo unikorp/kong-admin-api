@@ -246,7 +246,8 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\Document\Plugin::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Plugin::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -262,6 +263,31 @@ class PluginTest extends TestCase
         $this->assertSame(
             '{"name":"name","consumer_id":"consumerId","config.test":true,"config.something_else":"something_else","created_at":42}',
             $this->document->toJson()
+        );
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\Document\Plugin::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Plugin::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setName('name')
+            ->setConsumerId('consumerId')
+            ->addConfig('test', true)
+            ->addConfig('something_else', 'something_else')
+            ->setCreatedAt(42);
+
+        $this->assertSame(
+            'name=name&consumer_id=consumerId&config.test=1&config.something_else=something_else&created_at=42',
+            $this->document->toQueryString()
         );
     }
 }

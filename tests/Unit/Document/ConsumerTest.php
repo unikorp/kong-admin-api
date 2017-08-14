@@ -169,6 +169,7 @@ class ConsumerTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Consumer::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -178,7 +179,26 @@ class ConsumerTest extends TestCase
             ->setUsername('username')
             ->setCustomId('customId')
             ->setCreatedAt(42);
-
         $this->assertSame('{"username":"username","custom_id":"customId","created_at":42}', $this->document->toJson());
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Consumer::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setUsername('username')
+            ->setCustomId('customId')
+            ->setCreatedAt(42);
+
+        $this->assertSame('username=username&custom_id=customId&created_at=42', $this->document->toQueryString());
     }
 }

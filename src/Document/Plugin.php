@@ -148,28 +148,28 @@ class Plugin extends AbstractDocument
     }
 
     /**
-     * to json
+     * to request parameters
      *
-     * @return string
+     * @return array
      */
-    public function toJson(): string
+    public function toRequestParameters(): array
     {
-        $document = [];
+        $requestParameters = [];
 
         foreach (array_merge($this->getFields(), self::DEFAULT_FIELDS) as $field) {
             if (!is_null($value = $this->$field)) {
                 if (is_array($value)) {
                     foreach (array_keys($value) as $key) {
-                        $document[$this->toSnakeCase(sprintf('%1$s.%2$s', $field, $key))] = $value[$key];
+                        $requestParameters[$this->toSnakeCase(sprintf('%1$s.%2$s', $field, $key))] = $value[$key];
                     }
 
                     continue;
                 }
 
-                $document[$this->toSnakeCase($field)] = $this->$field;
+                $requestParameters[$this->toSnakeCase($field)] = $this->$field;
             }
         }
 
-        return json_encode($document);
+        return $requestParameters;
     }
 }

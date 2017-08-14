@@ -162,6 +162,7 @@ class ClusterTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Cluster::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -173,5 +174,25 @@ class ClusterTest extends TestCase
             ->setCreatedAt(42);
 
         $this->assertSame('{"name":"name","address":"address","created_at":42}', $this->document->toJson());
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Cluster::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setName('name')
+            ->setAddress('address')
+            ->setCreatedAt(42);
+
+        $this->assertSame('name=name&address=address&created_at=42', $this->document->toQueryString());
     }
 }

@@ -24,4 +24,11 @@ interface DocumentInterface
      * @return string
      */
     public function toJson(): string;
+
+    /**
+     * to query string
+     *
+     * @return string
+     */
+    public function toQueryString(): string;
 }

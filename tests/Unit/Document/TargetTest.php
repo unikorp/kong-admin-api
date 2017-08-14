@@ -162,6 +162,7 @@ class TargetTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Target::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -175,6 +176,29 @@ class TargetTest extends TestCase
         $this->assertSame(
             '{"target":"target","weight":1000,"created_at":42}',
             $this->document->toJson()
+        );
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Target::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setTarget('target')
+            ->setWeight(1000)
+            ->setCreatedAt(42);
+
+        $this->assertSame(
+            'target=target&weight=1000&created_at=42',
+            $this->document->toQueryString()
         );
     }
 }

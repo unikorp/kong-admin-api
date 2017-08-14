@@ -197,6 +197,7 @@ class CertificateTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
      * @covers \Unikorp\KongAdminApi\Document\Certificate::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
@@ -211,6 +212,30 @@ class CertificateTest extends TestCase
         $this->assertSame(
             '{"cert":"cert","key":"key","snis":"snis","created_at":42}',
             $this->document->toJson()
+        );
+    }
+
+    /**
+     * test to query string
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\Certificate::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
+     */
+    public function testToQueryString()
+    {
+        $this->document
+            ->setCert('cert')
+            ->setKey('key')
+            ->setSnis('snis')
+            ->setCreatedAt(42);
+
+        $this->assertSame(
+            'cert=cert&key=key&snis=snis&created_at=42',
+            $this->document->toQueryString()
         );
     }
 }
