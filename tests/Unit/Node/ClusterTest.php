@@ -82,34 +82,6 @@ class ClusterTest extends TestCase
     }
 
     /**
-     * test cluster information
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::clusterInformation
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testClusterInformation()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('/cluster'))
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->clusterInformation();
-    }
-
-    /**
      * test retrieve cluster status
      *
      * @return void
@@ -130,11 +102,51 @@ class ClusterTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/cluster/nodes/'))
+            ->with($this->equalTo('/cluster'))
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
         $node->retrieveClusterStatus();
+    }
+
+    /**
+     * test add a node
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\Cluster::addANode
+     * @covers \Unikorp\KongAdminApi\AbstractNode::post
+     */
+    public function testAddANode()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `document`
+        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Cluster');
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `delete` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('post')
+            ->with(
+                $this->equalTo('/cluster'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->addANode($document);
     }
 
     /**
@@ -167,13 +179,13 @@ class ClusterTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/cluster/nodes/test-cluster'),
+                $this->equalTo('/cluster'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->forciblyRemoveANode('test-cluster', $document);
+        $node->forciblyRemoveANode($document);
     }
 }
