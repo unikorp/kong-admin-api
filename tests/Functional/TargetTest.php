@@ -65,7 +65,12 @@ class TargetTest extends TestCase
             ->setName('TestUpstream');
         $this->client->getNode('upstream')->addUpstream($document);
 
-        // fixture: add target
+        // fixture: add targets
+        $document = new Document();
+        $document
+            ->setTarget('1.2.3.4:80');
+        $this->node->addTarget('TestUpstream', $document);
+
         $document = new Document();
         $document
             ->setTarget('1.2.3.4:80');
@@ -132,21 +137,31 @@ class TargetTest extends TestCase
      */
     public function testListTargets()
     {
+        // get target id
+        $targetId = json_decode($this->node->listTargets('TestUpstream')->getBody()->getContents(), true)['data'][0]['id'];
+
+        // prepare document
+        $document = new Document();
+        $document
+            ->setSize(1)
+            ->setOffset($targetId);
+
         // assert
-        $response = $this->node->listTargets('TestUpstream');
+        $response = $this->node->listTargets('TestUpstream', $document);
         $data = json_decode($response->getBody()->getContents(), true);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
         $this->assertArraySubset([
-            'total' => 1,
+            'total' => 2,
             'data' => [
                 [
-                    'target' => '1.2.3.4:80',
+                    'id' => $targetId,
 
                 ],
             ],
         ], $data);
+        $this->assertCount(1, $data['data']);
     }
 
     /**

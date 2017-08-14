@@ -52,12 +52,19 @@ class ApiTest extends TestCase
         // get node
         $this->node = $client->getNode('api');
 
-        // fixture: add api
+        // fixture: add apis
         $document = new Document();
         $document
             ->setName('TestApi')
             ->setHosts('test.api')
             ->setUpstreamUrl('http://test.api');
+        $this->node->addApi($document);
+
+        $document = new Document();
+        $document
+            ->setName('OtherApi')
+            ->setHosts('other.api')
+            ->setUpstreamUrl('http://other.api');
         $this->node->addApi($document);
     }
 
@@ -145,24 +152,30 @@ class ApiTest extends TestCase
      */
     public function testListApis()
     {
+        // get api id
+        $apiId = json_decode($this->node->listApis()->getBody()->getContents(), true)['data'][0]['id'];
+
+        // prepare document
+        $document = new Document();
+        $document
+            ->setSize(1)
+            ->setOffset($apiId);
+
         // assert
-        $response = $this->node->listApis();
+        $response = $this->node->listApis($document);
         $data = json_decode($response->getBody()->getContents(), true);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
         $this->assertArraySubset([
-            'total' => 1,
+            'total' => 2,
             'data' => [
                 [
-                    'name' => 'TestApi',
-                    'hosts' => [
-                        'test.api',
-                    ],
-                    'upstream_url' => 'http://test.api',
+                    'id' => $apiId,
                 ]
             ]
         ], $data);
+        $this->assertCount(1, $data['data']);
     }
 
     /**
