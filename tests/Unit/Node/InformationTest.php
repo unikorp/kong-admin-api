@@ -102,7 +102,10 @@ class InformationTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/'))
+            ->with(
+                $this->equalTo('/?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -130,7 +133,10 @@ class InformationTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/status'))
+            ->with(
+                $this->equalTo('/status?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);

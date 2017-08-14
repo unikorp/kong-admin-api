@@ -142,7 +142,10 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/plugins/test-plugin'))
+            ->with(
+                $this->equalTo('/plugins/test-plugin?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -170,7 +173,10 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/plugins/'))
+            ->with(
+                $this->equalTo('/plugins/?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -198,7 +204,10 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/apis/test-api/plugins/'))
+            ->with(
+                $this->equalTo('/apis/test-api/plugins/?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -343,7 +352,10 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/plugins/enabled'))
+            ->with(
+                $this->equalTo('/plugins/enabled?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -371,7 +383,10 @@ class PluginTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/plugins/schema/test-plugin'))
+            ->with(
+                $this->equalTo('/plugins/schema/test-plugin?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
