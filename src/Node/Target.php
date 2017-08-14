@@ -39,12 +39,13 @@ class Target extends AbstractNode
      * list targets
      *
      * @param string $nameOrId
+     * @param \Unikorp\KongAdminApi\Document\Target $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listTargets(string $nameOrId): ResponseInterface
+    public function listTargets(string $nameOrId, Document $document = null): ResponseInterface
     {
-        return $this->get(sprintf('/upstreams/%1$s/targets', $nameOrId));
+        return $this->get(sprintf('/upstreams/%1$s/targets', $nameOrId), $document);
     }
 
     /**
