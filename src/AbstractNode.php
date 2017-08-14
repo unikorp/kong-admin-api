@@ -19,6 +19,14 @@ namespace Unikorp\KongAdminApi;
 abstract class AbstractNode implements NodeInterface
 {
     /**
+     * urlencoded content type
+     * @const array URLENCODED_CONTENT_TYPE
+     */
+    const URLENCODED_CONTENT_TYPE = [
+        'Content-Type' => 'application/x-www-form-urlencoded',
+    ];
+
+    /**
      * json content type
      * @const array JSON_CONTENT_TYPE
      */
@@ -49,9 +57,12 @@ abstract class AbstractNode implements NodeInterface
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function get($endpoint)
+    protected function get($endpoint, DocumentInterface $document = null)
     {
-        return $this->client->getHttpClient()->get($endpoint);
+        return $this->client->getHttpClient()->get(
+            sprintf('%1$s?%2$s', $endpoint, $document ? $document->toQueryString() : ''),
+            self::URLENCODED_CONTENT_TYPE
+        );
     }
 
     /**

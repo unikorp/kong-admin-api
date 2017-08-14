@@ -142,7 +142,10 @@ class TargetTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/upstreams/test-upstream/targets'))
+            ->with(
+                $this->equalTo('/upstreams/test-upstream/targets?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -170,7 +173,10 @@ class TargetTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/upstreams/test-upstream/targets/active'))
+            ->with(
+                $this->equalTo('/upstreams/test-upstream/targets/active?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);

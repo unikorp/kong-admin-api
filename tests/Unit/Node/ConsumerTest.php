@@ -142,7 +142,10 @@ class ConsumerTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/consumers/test-consumer'))
+            ->with(
+                $this->equalTo('/consumers/test-consumer?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -170,7 +173,10 @@ class ConsumerTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/consumers/'))
+            ->with(
+                $this->equalTo('/consumers/?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);

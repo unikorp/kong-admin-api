@@ -142,7 +142,10 @@ class SniTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/snis/test-sni'))
+            ->with(
+                $this->equalTo('/snis/test-sni?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
@@ -170,7 +173,10 @@ class SniTest extends TestCase
         // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('/snis/'))
+            ->with(
+                $this->equalTo('/snis/?'),
+                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+            )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
