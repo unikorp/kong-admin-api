@@ -52,10 +52,15 @@ class UpstreamTest extends TestCase
         // get node
         $this->node = $client->getNode('upstream');
 
-        // fixture: add upstream
+        // fixture: add upstreams
         $document = new Document();
         $document
             ->setName('TestUpstream');
+        $this->node->addUpstream($document);
+
+        $document = new Document();
+        $document
+            ->setName('OtherUpstream');
         $this->node->addUpstream($document);
     }
 
@@ -132,17 +137,26 @@ class UpstreamTest extends TestCase
      */
     public function testListUpstreams()
     {
+        // get upstream id
+        $upstreamId = json_decode($this->node->listUpstreams()->getBody()->getContents(), true)['data'][0]['id'];
+
+        // prepare document
+        $document = new Document();
+        $document
+            ->setSize(1)
+            ->setOffset($upstreamId);
+
         // assert
-        $response = $this->node->listUpstreams();
+        $response = $this->node->listUpstreams($document);
         $data = json_decode($response->getBody()->getContents(), true);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
         $this->assertArraySubset([
-            'total' => 1,
+            'total' => 2,
             'data' => [
                 [
-                    'name' => 'TestUpstream',
+                    'id' => $upstreamId,
                 ],
             ],
         ], $data);

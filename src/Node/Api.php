@@ -49,11 +49,13 @@ class Api extends AbstractNode
     /**
      * list apis
      *
+     * @param \Unikorp\KongAdminApi\Document\Api $document
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listApis(): ResponseInterface
+    public function listApis(Document $document = null): ResponseInterface
     {
-        return $this->get('/apis/');
+        return $this->get('/apis/', $document);
     }
 
     /**

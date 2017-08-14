@@ -52,10 +52,15 @@ class ConsumerTest extends TestCase
         // get node
         $this->node = $client->getNode('consumer');
 
-        // fixture: add consumer
+        // fixture: add consumers
         $document = new Document();
         $document
             ->setUsername('TestConsumer');
+        $this->node->createConsumer($document);
+
+        $document = new Document();
+        $document
+            ->setUsername('OtherConsumer');
         $this->node->createConsumer($document);
     }
 
@@ -132,20 +137,30 @@ class ConsumerTest extends TestCase
      */
     public function testlistConsumers()
     {
+        // get consumer id
+        $consumerId = json_decode($this->node->listConsumers()->getBody()->getContents(), true)['data'][0]['id'];
+
+        // prepare document
+        $document = new Document();
+        $document
+            ->setSize(1)
+            ->setOffset($consumerId);
+
         // assert
-        $response = $this->node->listConsumers();
+        $response = $this->node->listConsumers($document);
         $data = json_decode($response->getBody()->getContents(), true);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
         $this->assertArraySubset([
-            'total' => 1,
+            'total' => 2,
             'data' => [
                 [
-                    'username' => 'TestConsumer',
+                    'id' => $consumerId,
                 ]
             ]
         ], $data);
+        $this->assertCount(1, $data['data']);
     }
 
     /**

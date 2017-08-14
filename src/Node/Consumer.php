@@ -49,11 +49,13 @@ class Consumer extends AbstractNode
     /**
      * list consumers
      *
+     * @param \Unikorp\KongAdminApi\Document\Consumer $document
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listConsumers(): ResponseInterface
+    public function listConsumers(Document $document = null): ResponseInterface
     {
-        return $this->get('/consumers/');
+        return $this->get('/consumers/', $document);
     }
 
     /**

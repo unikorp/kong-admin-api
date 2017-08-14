@@ -67,12 +67,20 @@ class PluginTest extends TestCase
             ->setUpstreamUrl('http://test.api');
         $this->client->getNode('api')->addApi($document);
 
-        // fixture: add plugin
+        // fixture: add plugins
         $document = new Document();
         $document
             ->setName('rate-limiting')
             ->addConfig('second', 5)
             ->addConfig('hour', 10000);
+        $this->node->addPlugin('TestApi', $document);
+
+        $document = new Document();
+        $document
+            ->setName('datadog')
+            ->addConfig('host', '127.0.0.1')
+            ->addConfig('port', 8125)
+            ->addConfig('timeout', 1000);
         $this->node->addPlugin('TestApi', $document);
     }
 
@@ -167,24 +175,30 @@ class PluginTest extends TestCase
      */
     public function testListAllPlugins()
     {
+        // get plugin id
+        $pluginId = json_decode($this->node->listAllPlugins()->getBody()->getContents(), true)['data'][0]['id'];
+
+        // prepare document
+        $document = new Document();
+        $document
+            ->setSize(1)
+            ->setOffset($pluginId);
+
         // assert
-        $response = $this->node->listAllPlugins();
+        $response = $this->node->listAllPlugins($document);
         $data = json_decode($response->getBody()->getContents(), true);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
         $this->assertArraySubset([
-            'total' => 1,
+            'total' => 2,
             'data' => [
                 [
-                    'name' => 'rate-limiting',
-                    'config' => [
-                        'second' => 5,
-                        'hour' => 10000,
-                    ],
+                    'id' => $pluginId,
                 ],
             ],
         ], $data);
+        $this->assertCount(1, $data['data']);
     }
 
     /**
@@ -203,15 +217,8 @@ class PluginTest extends TestCase
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
         $this->assertArraySubset([
-            'total' => 1,
+            'total' => 2,
             'data' => [
-                [
-                    'name' => 'rate-limiting',
-                    'config' => [
-                        'second' => 5,
-                        'hour' => 10000,
-                    ],
-                ],
             ],
         ], $data);
     }

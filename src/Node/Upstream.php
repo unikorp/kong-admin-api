@@ -49,11 +49,13 @@ class Upstream extends AbstractNode
     /**
      * list upstreams
      *
+     * @param \Unikorp\KongAdminApi\Document\Upstream $document
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listUpstreams(): ResponseInterface
+    public function listUpstreams(Document $document = null): ResponseInterface
     {
-        return $this->get('/upstreams/');
+        return $this->get('/upstreams/', $document);
     }
 
     /**

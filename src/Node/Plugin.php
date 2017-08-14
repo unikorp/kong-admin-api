@@ -50,11 +50,13 @@ class Plugin extends AbstractNode
     /**
      * list all plugins
      *
+     * @param \Unikorp\KongAdminApi\Document\Plugin $document
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listAllPlugins(): ResponseInterface
+    public function listAllPlugins(Document $document = null): ResponseInterface
     {
-        return $this->get('/plugins/');
+        return $this->get('/plugins/', $document);
     }
 
     /**
