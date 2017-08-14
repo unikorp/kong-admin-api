@@ -542,6 +542,77 @@ class ApiTest extends TestCase
     }
 
     /**
+     * test set size
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setSize
+     */
+    public function testSetSize()
+    {
+        // asserts
+        $this->document->setSize(42);
+        $this->assertSame(42, $this->readAttribute($this->document, 'size'));
+    }
+
+    /**
+     * test get size
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getSize
+     */
+    public function testGetSize()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `size` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('size');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 42);
+        $this->assertSame(42, $this->document->getSize());
+    }
+
+
+    /**
+     * test set offset
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setOffset
+     */
+    public function testSetOffset()
+    {
+        // asserts
+        $this->document->setOffset('offset');
+        $this->assertSame('offset', $this->readAttribute($this->document, 'offset'));
+    }
+
+    /**
+     * test get offset
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getOffset
+     */
+    public function testGetOffset()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `offset` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('offset');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 'offset');
+        $this->assertSame('offset', $this->document->getOffset());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -567,10 +638,12 @@ class ApiTest extends TestCase
             ->setUpstreamReadTimeout(10000)
             ->setHttpsOnly(true)
             ->setHttpIfTerminated(false)
-            ->setCreatedAt(42);
+            ->setCreatedAt(42)
+            ->setSize(50)
+            ->setOffset('offset');
 
         $this->assertSame(
-            '{"name":"name","hosts":"hosts","uris":"uris","methods":"methods","upstream_url":"upstreamUrl","strip_uri":false,"preserve_host":true,"retries":10,"upstream_connect_timeout":10000,"upstream_send_timeout":10000,"upstream_read_timeout":10000,"https_only":true,"http_if_terminated":false,"created_at":42}',
+            '{"name":"name","hosts":"hosts","uris":"uris","methods":"methods","upstream_url":"upstreamUrl","strip_uri":false,"preserve_host":true,"retries":10,"upstream_connect_timeout":10000,"upstream_send_timeout":10000,"upstream_read_timeout":10000,"https_only":true,"http_if_terminated":false,"created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -601,10 +674,12 @@ class ApiTest extends TestCase
             ->setUpstreamReadTimeout(10000)
             ->setHttpsOnly(true)
             ->setHttpIfTerminated(false)
-            ->setCreatedAt(42);
+            ->setCreatedAt(42)
+            ->setSize(50)
+            ->setOffset('offset');
 
         $this->assertSame(
-            'name=name&hosts=hosts&uris=uris&methods=methods&upstream_url=upstreamUrl&strip_uri=0&preserve_host=1&retries=10&upstream_connect_timeout=10000&upstream_send_timeout=10000&upstream_read_timeout=10000&https_only=1&http_if_terminated=0&created_at=42',
+            'name=name&hosts=hosts&uris=uris&methods=methods&upstream_url=upstreamUrl&strip_uri=0&preserve_host=1&retries=10&upstream_connect_timeout=10000&upstream_send_timeout=10000&upstream_read_timeout=10000&https_only=1&http_if_terminated=0&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }

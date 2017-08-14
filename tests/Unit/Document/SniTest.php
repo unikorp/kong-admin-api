@@ -157,6 +157,77 @@ class SniTest extends TestCase
     }
 
     /**
+     * test set size
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setSize
+     */
+    public function testSetSize()
+    {
+        // asserts
+        $this->document->setSize(42);
+        $this->assertSame(42, $this->readAttribute($this->document, 'size'));
+    }
+
+    /**
+     * test get size
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getSize
+     */
+    public function testGetSize()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `size` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('size');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 42);
+        $this->assertSame(42, $this->document->getSize());
+    }
+
+
+    /**
+     * test set offset
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setOffset
+     */
+    public function testSetOffset()
+    {
+        // asserts
+        $this->document->setOffset('offset');
+        $this->assertSame('offset', $this->readAttribute($this->document, 'offset'));
+    }
+
+    /**
+     * test get offset
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getOffset
+     */
+    public function testGetOffset()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `offset` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('offset');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 'offset');
+        $this->assertSame('offset', $this->document->getOffset());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -171,10 +242,12 @@ class SniTest extends TestCase
         $this->document
             ->setName('name')
             ->setSslCertificateId('sslCertificateId')
-            ->setCreatedAt(42);
+            ->setCreatedAt(42)
+            ->setSize(50)
+            ->setOffset('offset');
 
         $this->assertSame(
-            '{"name":"name","ssl_certificate_id":"sslCertificateId","created_at":42}',
+            '{"name":"name","ssl_certificate_id":"sslCertificateId","created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -194,10 +267,12 @@ class SniTest extends TestCase
         $this->document
             ->setName('name')
             ->setSslCertificateId('sslCertificateId')
-            ->setCreatedAt(42);
+            ->setCreatedAt(42)
+            ->setSize(50)
+            ->setOffset('offset');
 
         $this->assertSame(
-            'name=name&ssl_certificate_id=sslCertificateId&created_at=42',
+            'name=name&ssl_certificate_id=sslCertificateId&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }

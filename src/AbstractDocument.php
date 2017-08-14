@@ -22,13 +22,25 @@ abstract class AbstractDocument implements DocumentInterface
      * default fields
      * @const array DEFAULT_FIELDS
      */
-    const DEFAULT_FIELDS = ['createdAt'];
+    const DEFAULT_FIELDS = ['createdAt', 'size', 'offset'];
 
     /**
      * created at
      * @param int $createdAt
      */
     protected $createdAt = null;
+
+    /**
+     * size
+     * @param int $size
+     */
+    protected $size = null;
+
+    /**
+     * offset
+     * @param string $offset
+     */
+    protected $offset = null;
 
     /**
      * get fields
@@ -44,7 +56,7 @@ abstract class AbstractDocument implements DocumentInterface
      *
      * @return this
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(int $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -59,6 +71,54 @@ abstract class AbstractDocument implements DocumentInterface
     public function getCreatedAt(): int
     {
         return $this->createdAt;
+    }
+
+    /**
+     * set size
+     *
+     * @param int $size
+     *
+     * @return this
+     */
+    public function setSize(int $size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * get size
+     *
+     * @return int
+     */
+    public function getSize(): int
+    {
+        return $this->size;
+    }
+
+    /**
+     * set offset
+     *
+     * @param string $offset
+     *
+     * @return this
+     */
+    public function setOffset(string $offset)
+    {
+        $this->offset = $offset;
+
+        return $this;
+    }
+
+    /**
+     * get offset
+     *
+     * @return string
+     */
+    public function getOffset(): string
+    {
+        return $this->offset;
     }
 
     /**
