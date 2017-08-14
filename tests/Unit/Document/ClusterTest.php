@@ -87,6 +87,41 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * test set address
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\Cluster::setAddress
+     */
+    public function testSetAddress()
+    {
+        // asserts
+        $this->document->setAddress('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'address'));
+    }
+
+    /**
+     * test get address
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\Cluster::getAddress
+     */
+    public function testGetAddress()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `address` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('address');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 'test');
+        $this->assertSame('test', $this->document->getAddress());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -98,8 +133,9 @@ class ClusterTest extends TestCase
     public function testToJson()
     {
         $this->document
-            ->setName('name');
+            ->setName('name')
+            ->setAddress('address');
 
-        $this->assertSame('{"name":"name"}', $this->document->toJson());
+        $this->assertSame('{"name":"name","address":"address"}', $this->document->toJson());
     }
 }
