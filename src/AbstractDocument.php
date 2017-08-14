@@ -68,15 +68,35 @@ abstract class AbstractDocument implements DocumentInterface
      */
     public function toJson(): string
     {
-        $document = [];
+        return json_encode($this->toRequestParameters());
+    }
+
+    /**
+     * to query string
+     *
+     * @return string
+     */
+    public function toQueryString(): string
+    {
+        return http_build_query($this->toRequestParameters());
+    }
+
+    /**
+     * to request parameters
+     *
+     * @return array
+     */
+    protected function toRequestParameters(): array
+    {
+        $requestParameters = [];
 
         foreach (array_merge($this->getFields(), self::DEFAULT_FIELDS) as $field) {
             if (!is_null($value = $this->$field)) {
-                $document[$this->toSnakeCase($field)] = $value;
+                $requestParameters[$this->toSnakeCase($field)] = $value;
             }
         }
 
-        return json_encode($document);
+        return $requestParameters;
     }
 
     /**
