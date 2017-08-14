@@ -20,15 +20,12 @@ install:
 
 before_script:
     - docker-compose -f tests/Functional/docker-compose.yml up -d --scale kong=2
-    - sleep 20 # give postgresql the time to start
+    - sleep 30 # give postgresql the time to start
 
 script:
     - ./vendor/bin/phpunit
 
-after_script:
-    ## Scrutinizer
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - php ocular.phar --access-token="86bd9078d28a29fca0a80e4998931db4abb845fe3b681dfd099a9dddd0f8bd71" code-coverage:upload --format=php-clover ./build/logs/clover.xml
+before_deploy:
     ## Sami
     - wget http://get.sensiolabs.org/sami.phar
     - php sami.phar update .sami.php
@@ -42,3 +39,8 @@ deploy:
     local_dir: build/api
     upload-dir: kong-admin-api/master
     skip_cleanup: true
+
+after_script:
+    ## Scrutinizer
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar --access-token="86bd9078d28a29fca0a80e4998931db4abb845fe3b681dfd099a9dddd0f8bd71" code-coverage:upload --format=php-clover ./build/logs/clover.xml
