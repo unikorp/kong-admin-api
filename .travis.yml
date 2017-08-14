@@ -1,6 +1,9 @@
 language: php
 
-sudo: false
+sudo: required
+
+services:
+    - docker
 
 git:
     depth: 1
@@ -12,8 +15,14 @@ cache:
     directories:
         - $HOME/.composer/cache
 
-script:
+install:
     - composer install
+
+before_script:
+    - docker-compose -f tests/Functional/docker-compose.yml up -d --scale kong=2
+    - sleep 20 # give postgresql the time to start
+
+script:
     - ./vendor/bin/phpunit
 
 after_script:
