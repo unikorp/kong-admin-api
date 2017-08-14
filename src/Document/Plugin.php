@@ -156,7 +156,7 @@ class Plugin extends AbstractDocument
     {
         $document = [];
 
-        foreach ($this->getFields() as $field) {
+        foreach (array_merge($this->getFields(), self::DEFAULT_FIELDS) as $field) {
             if (!is_null($value = $this->$field)) {
                 if (is_array($value)) {
                     foreach (array_keys($value) as $key) {
