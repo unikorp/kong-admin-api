@@ -238,6 +238,11 @@ class CertificateTest extends TestCase
         // mock `document`
         $document = $this->createMock('\Unikorp\KongAdminApi\Document\Certificate');
 
+        // stub `set created at` method from `document` mock
+        $document->expects($this->once())
+            ->method('setCreatedAt')
+            ->with($this->isType('int'));
+
         // stub `to json` method from `document` mock
         $document->expects($this->once())
             ->method('toJson')
