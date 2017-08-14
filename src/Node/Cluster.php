@@ -23,35 +23,36 @@ use Unikorp\KongAdminApi\Document\Cluster as Document;
 class Cluster extends AbstractNode
 {
     /**
-     * cluster information
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function clusterInformation(): ResponseInterface
-    {
-        return $this->get('/cluster');
-    }
-
-    /**
      * retrieve cluster status
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function retrieveClusterStatus(): ResponseInterface
     {
-        return $this->get('/cluster/nodes/');
+        return $this->get('/cluster');
+    }
+
+    /**
+     * add a node
+     *
+     * @param \Unikorp\KongAdminApi\Document\Cluster $document
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function addANode(Document $document): ResponseInterface
+    {
+        return $this->post('/cluster', $document);
     }
 
     /**
      * forcibly remove a node
      *
-     * @param string $name
      * @param \Unikorp\KongAdminApi\Document\Cluster $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function forciblyRemoveANode(string $name, Document $document): ResponseInterface
+    public function forciblyRemoveANode(Document $document): ResponseInterface
     {
-        return $this->delete(sprintf('/cluster/nodes/%1$s', $name), $document);
+        return $this->delete('/cluster', $document);
     }
 }
