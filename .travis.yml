@@ -29,3 +29,16 @@ after_script:
     ## Scrutinizer
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar --access-token="86bd9078d28a29fca0a80e4998931db4abb845fe3b681dfd099a9dddd0f8bd71" code-coverage:upload --format=php-clover ./build/logs/clover.xml
+    ## Sami
+    - wget http://get.sensiolabs.org/sami.phar
+    - php sami.phar update .sami.php
+
+deploy:
+    provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    region: eu-west-2
+    bucket: unikorp-docs
+    local_dir: build/api
+    upload-dir: kong-admin-api/master
+    skip_cleanup: true
