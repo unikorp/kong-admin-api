@@ -192,6 +192,77 @@ class UpstreamTest extends TestCase
     }
 
     /**
+     * test set size
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setSize
+     */
+    public function testSetSize()
+    {
+        // asserts
+        $this->document->setSize(42);
+        $this->assertSame(42, $this->readAttribute($this->document, 'size'));
+    }
+
+    /**
+     * test get size
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getSize
+     */
+    public function testGetSize()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `size` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('size');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 42);
+        $this->assertSame(42, $this->document->getSize());
+    }
+
+
+    /**
+     * test set offset
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setOffset
+     */
+    public function testSetOffset()
+    {
+        // asserts
+        $this->document->setOffset('offset');
+        $this->assertSame('offset', $this->readAttribute($this->document, 'offset'));
+    }
+
+    /**
+     * test get offset
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getOffset
+     */
+    public function testGetOffset()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `offset` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('offset');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 'offset');
+        $this->assertSame('offset', $this->document->getOffset());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -207,10 +278,12 @@ class UpstreamTest extends TestCase
             ->setName('name')
             ->setSlots(65536)
             ->setOrderlist([1, 2, 7, 9, 6, 3])
-            ->setCreatedAt(42);
+            ->setCreatedAt(42)
+            ->setSize(50)
+            ->setOffset('offset');
 
         $this->assertSame(
-            '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3],"created_at":42}',
+            '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3],"created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -231,10 +304,12 @@ class UpstreamTest extends TestCase
             ->setName('name')
             ->setSlots(65536)
             ->setOrderlist([1, 2, 7, 9, 6, 3])
-            ->setCreatedAt(42);
+            ->setCreatedAt(42)
+            ->setSize(50)
+            ->setOffset('offset');
 
         $this->assertSame(
-            'name=name&slots=65536&orderlist%5B0%5D=1&orderlist%5B1%5D=2&orderlist%5B2%5D=7&orderlist%5B3%5D=9&orderlist%5B4%5D=6&orderlist%5B5%5D=3&created_at=42',
+            'name=name&slots=65536&orderlist%5B0%5D=1&orderlist%5B1%5D=2&orderlist%5B2%5D=7&orderlist%5B3%5D=9&orderlist%5B4%5D=6&orderlist%5B5%5D=3&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }
