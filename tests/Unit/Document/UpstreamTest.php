@@ -157,6 +157,41 @@ class UpstreamTest extends TestCase
     }
 
     /**
+     * test set created at
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setCreatedAt
+     */
+    public function testSetCreatedAt()
+    {
+        // asserts
+        $this->document->setCreatedAt(42);
+        $this->assertSame(42, $this->readAttribute($this->document, 'createdAt'));
+    }
+
+    /**
+     * test get created at
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getCreatedAt
+     */
+    public function testGetCreatedAt()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `created at` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('createdAt');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 42);
+        $this->assertSame(42, $this->document->getCreatedAt());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -170,10 +205,11 @@ class UpstreamTest extends TestCase
         $this->document
             ->setName('name')
             ->setSlots(65536)
-            ->setOrderlist([1, 2, 7, 9, 6, 3]);
+            ->setOrderlist([1, 2, 7, 9, 6, 3])
+            ->setCreatedAt(42);
 
         $this->assertSame(
-            '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3]}',
+            '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3],"created_at":42}',
             $this->document->toJson()
         );
     }

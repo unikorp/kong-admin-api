@@ -507,6 +507,41 @@ class ApiTest extends TestCase
     }
 
     /**
+     * test set created at
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setCreatedAt
+     */
+    public function testSetCreatedAt()
+    {
+        // asserts
+        $this->document->setCreatedAt(42);
+        $this->assertSame(42, $this->readAttribute($this->document, 'createdAt'));
+    }
+
+    /**
+     * test get created at
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getCreatedAt
+     */
+    public function testGetCreatedAt()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `created at` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('createdAt');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 42);
+        $this->assertSame(42, $this->document->getCreatedAt());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -530,10 +565,11 @@ class ApiTest extends TestCase
             ->setUpstreamSendTimeout(10000)
             ->setUpstreamReadTimeout(10000)
             ->setHttpsOnly(true)
-            ->setHttpIfTerminated(false);
+            ->setHttpIfTerminated(false)
+            ->setCreatedAt(42);
 
         $this->assertSame(
-            '{"name":"name","hosts":"hosts","uris":"uris","methods":"methods","upstream_url":"upstreamUrl","strip_uri":false,"preserve_host":true,"retries":10,"upstream_connect_timeout":10000,"upstream_send_timeout":10000,"upstream_read_timeout":10000,"https_only":true,"http_if_terminated":false}',
+            '{"name":"name","hosts":"hosts","uris":"uris","methods":"methods","upstream_url":"upstreamUrl","strip_uri":false,"preserve_host":true,"retries":10,"upstream_connect_timeout":10000,"upstream_send_timeout":10000,"upstream_read_timeout":10000,"https_only":true,"http_if_terminated":false,"created_at":42}',
             $this->document->toJson()
         );
     }

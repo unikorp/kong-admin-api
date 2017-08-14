@@ -266,6 +266,11 @@ class PluginTest extends TestCase
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
+        // stub `set created at` method from `document` mock
+        $document->expects($this->once())
+            ->method('setCreatedAt')
+            ->with($this->isType('int'));
+
         // stub `to json` method from `document` mock
         $document->expects($this->once())
             ->method('toJson')

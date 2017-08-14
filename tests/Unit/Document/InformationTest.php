@@ -52,6 +52,41 @@ class InformationTest extends TestCase
     }
 
     /**
+     * test set created at
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::setCreatedAt
+     */
+    public function testSetCreatedAt()
+    {
+        // asserts
+        $this->document->setCreatedAt(42);
+        $this->assertSame(42, $this->readAttribute($this->document, 'createdAt'));
+    }
+
+    /**
+     * test get created at
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::getCreatedAt
+     */
+    public function testGetCreatedAt()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `created at` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('createdAt');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 42);
+        $this->assertSame(42, $this->document->getCreatedAt());
+    }
+
+    /**
      * test to json
      *
      * @return void
@@ -61,6 +96,8 @@ class InformationTest extends TestCase
      */
     public function testToJson()
     {
-        $this->assertSame('[]', $this->document->toJson());
+        $this->document->setCreatedAt(42);
+
+        $this->assertSame('{"created_at":42}', $this->document->toJson());
     }
 }
