@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Api as Document;
+use Unikorp\KongAdminApi\Document\ApiDocument as Document;
 
 /**
  * api
@@ -25,7 +25,7 @@ class Api extends AbstractNode
     /**
      * add api
      *
-     * @param \Unikorp\KongAdminApi\Document\Api $document
+     * @param \Unikorp\KongAdminApi\Document\ApiDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -49,7 +49,7 @@ class Api extends AbstractNode
     /**
      * list apis
      *
-     * @param \Unikorp\KongAdminApi\Document\Api $document
+     * @param \Unikorp\KongAdminApi\Document\ApiDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -62,7 +62,7 @@ class Api extends AbstractNode
      * update api
      *
      * @param string $nameOrId
-     * @param \Unikorp\KongAdminApi\Document\Api $document
+     * @param \Unikorp\KongAdminApi\Document\ApiDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -74,7 +74,7 @@ class Api extends AbstractNode
     /**
      * update or create api
      *
-     * @param \Unikorp\KongAdminApi\Document\Api $document
+     * @param \Unikorp\KongAdminApi\Document\ApiDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

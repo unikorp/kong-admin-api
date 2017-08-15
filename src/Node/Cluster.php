@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Cluster as Document;
+use Unikorp\KongAdminApi\Document\ClusterDocument as Document;
 
 /**
  * cluster
@@ -35,7 +35,7 @@ class Cluster extends AbstractNode
     /**
      * add a node
      *
-     * @param \Unikorp\KongAdminApi\Document\Cluster $document
+     * @param \Unikorp\KongAdminApi\Document\ClusterDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -47,7 +47,7 @@ class Cluster extends AbstractNode
     /**
      * forcibly remove a node
      *
-     * @param \Unikorp\KongAdminApi\Document\Cluster $document
+     * @param \Unikorp\KongAdminApi\Document\ClusterDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

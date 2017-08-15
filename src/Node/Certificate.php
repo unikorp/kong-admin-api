@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Certificate as Document;
+use Unikorp\KongAdminApi\Document\CertificateDocument as Document;
 
 /**
  * certificate
@@ -25,7 +25,7 @@ class Certificate extends AbstractNode
     /**
      * add certificate
      *
-     * @param \Unikorp\KongAdminApi\Document\Certificate $document
+     * @param \Unikorp\KongAdminApi\Document\CertificateDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -60,7 +60,7 @@ class Certificate extends AbstractNode
      * update certificate
      *
      * @param string $sniOrId
-     * @param \Unikorp\KongAdminApi\Document\Certificate $document
+     * @param \Unikorp\KongAdminApi\Document\CertificateDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -72,7 +72,7 @@ class Certificate extends AbstractNode
     /**
      * update or create certificate
      *
-     * @param \Unikorp\KongAdminApi\Document\Certificate $document
+     * @param \Unikorp\KongAdminApi\Document\CertificateDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

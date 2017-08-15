@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Upstream as Document;
+use Unikorp\KongAdminApi\Document\UpstreamDocument as Document;
 
 /**
  * upstream
@@ -25,7 +25,7 @@ class Upstream extends AbstractNode
     /**
      * add upstream
      *
-     * @param \Unikorp\KongAdminApi\Document\Upstream $document
+     * @param \Unikorp\KongAdminApi\Document\UpstreamDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -49,7 +49,7 @@ class Upstream extends AbstractNode
     /**
      * list upstreams
      *
-     * @param \Unikorp\KongAdminApi\Document\Upstream $document
+     * @param \Unikorp\KongAdminApi\Document\UpstreamDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -62,7 +62,7 @@ class Upstream extends AbstractNode
      * update upstream
      *
      * @param string $nameOrId
-     * @param \Unikorp\KongAdminApi\Document\Upstream $document
+     * @param \Unikorp\KongAdminApi\Document\UpstreamDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -74,7 +74,7 @@ class Upstream extends AbstractNode
     /**
      * update or create upstream
      *
-     * @param \Unikorp\KongAdminApi\Document\Upstream $document
+     * @param \Unikorp\KongAdminApi\Document\UpstreamDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
