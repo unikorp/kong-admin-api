@@ -90,11 +90,13 @@ class Client
      *
      * @param \Http\Client\Common\Plugin $plugin
      *
-     * @return void
+     * @return this
      */
-    public function addPlugin(Plugin $plugin): void
+    public function addPlugin(Plugin $plugin): self
     {
         $this->plugins[] = $plugin;
+
+        return $this;
     }
 
     /**
