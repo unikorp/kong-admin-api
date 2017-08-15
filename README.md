@@ -1,6 +1,6 @@
 # kong-admin-api
 
-[![Documentation](https://img.shields.io/badge/doc-master-blue.svg)](http://docs.unikorp.io/kong-admin-api/api/master/)
+[![Documentation](https://img.shields.io/badge/doc-v0.0.1--alpha.5-blue.svg)](http://docs.unikorp.io/kong-admin-api/api/v0.0.1-alpha.5/)
 [![Build Status](https://scrutinizer-ci.com/g/unikorp/kong-admin-api/badges/build.png?b=master)](https://scrutinizer-ci.com/g/unikorp/kong-admin-api/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/unikorp/kong-admin-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/unikorp/kong-admin-api/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/unikorp/kong-admin-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/unikorp/kong-admin-api/?branch=master)
