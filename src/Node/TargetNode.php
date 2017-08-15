@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\TargetDocument as Document;
 
 /**
- * target
+ * target node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Target extends AbstractNode
+class TargetNode extends AbstractNode
 {
     /**
      * add target

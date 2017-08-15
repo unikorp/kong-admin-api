@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\UpstreamDocument as Document;
 
 /**
- * upstream
+ * upstream node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Upstream extends AbstractNode
+class UpstreamNode extends AbstractNode
 {
     /**
      * add upstream

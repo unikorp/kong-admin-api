@@ -11,15 +11,16 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Node\Information as Node;
+use Unikorp\KongAdminApi\Document\ClusterDocument as Document;
+use Unikorp\KongAdminApi\Node\ClusterNode as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * information test
+ * cluster node test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class InformationTest extends TestCase
+class ClusterNodeTest extends TestCase
 {
     /**
      * client
@@ -82,14 +83,14 @@ class InformationTest extends TestCase
     }
 
     /**
-     * test retrieve node information
+     * test retrieve cluster status
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Information::retrieveNodeInformation
+     * @covers \Unikorp\KongAdminApi\Node\ClusterNode::retrieveClusterStatus
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrieveNodeInformation()
+    public function testRetrieveClusterStatus()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -103,43 +104,92 @@ class InformationTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/?'),
+                $this->equalTo('/cluster?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrieveNodeInformation();
+        $node->retrieveClusterStatus();
     }
 
     /**
-     * test retrieve node status
+     * test add a node
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Information::retrieveNodeStatus
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
+     * @covers \Unikorp\KongAdminApi\Node\ClusterNode::addANode
+     * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testRetrieveNodeStatus()
+    public function testAddANode()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
             ->method('getHttpClient')
             ->will($this->returnValue($this->httpClient));
 
+        // mock `document`
+        $document = $this->createMock(Document::class);
+
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
-        // stub `get` method from `http client` mock
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `delete` method from `http client` mock
         $this->httpClient->expects($this->once())
-            ->method('get')
+            ->method('post')
             ->with(
-                $this->equalTo('/status?'),
-                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
+                $this->equalTo('/cluster'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrieveNodeStatus();
+        $node->addANode($document);
+    }
+
+    /**
+     * test forcibly remove a node
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\ClusterNode::forciblyRemoveANode
+     * @covers \Unikorp\KongAdminApi\AbstractNode::delete
+     */
+    public function testForciblyRemoveANode()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `document`
+        $document = $this->createMock(Document::class);
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `delete` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('delete')
+            ->with(
+                $this->equalTo('/cluster'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->forciblyRemoveANode($document);
     }
 }

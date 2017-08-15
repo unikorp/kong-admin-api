@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\PluginDocument as Document;
 
 /**
- * plugin
+ * plugin node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Plugin extends AbstractNode
+class PluginNode extends AbstractNode
 {
     /**
      * add plugin

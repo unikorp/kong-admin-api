@@ -15,18 +15,18 @@ use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\ClusterDocument as Document;
-use Unikorp\KongAdminApi\Node\Cluster as Node;
+use Unikorp\KongAdminApi\Node\ClusterNode as Node;
 
 /**
  * cluster test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class ClusterTest extends TestCase
+class ClusterNodeTest extends TestCase
 {
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Cluster $node
+     * @param \Unikorp\KongAdminApi\Node\ClusterNode $node
      */
     private $node = null;
 
@@ -70,7 +70,7 @@ class ClusterTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::retrieveClusterStatus
+     * @covers \Unikorp\KongAdminApi\Node\ClusterNode::retrieveClusterStatus
      */
     public function testRetrieveClusterStatus()
     {
@@ -90,7 +90,7 @@ class ClusterTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::addANode
+     * @covers \Unikorp\KongAdminApi\Node\ClusterNode::addANode
      */
     public function testAddANode()
     {
@@ -116,7 +116,7 @@ class ClusterTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Cluster::forciblyRemoveANode
+     * @covers \Unikorp\KongAdminApi\Node\ClusterNode::forciblyRemoveANode
      */
     public function testForciblyRemoveANode()
     {

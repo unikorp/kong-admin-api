@@ -44,15 +44,15 @@ class Configurator implements ConfiguratorInterface
     public function __construct()
     {
         $this->nodes = [
-            'api' => Node\Api::class,
-            'certificate' => Node\Certificate::class,
-            'cluster' => Node\Cluster::class,
-            'consumer' => Node\Consumer::class,
-            'information' => Node\Information::class,
-            'plugin' => Node\Plugin::class,
-            'sni' => Node\Sni::class,
-            'target' => Node\Target::class,
-            'upstream' => Node\Upstream::class,
+            'api' => Node\ApiNode::class,
+            'certificate' => Node\CertificateNode::class,
+            'cluster' => Node\ClusterNode::class,
+            'consumer' => Node\ConsumerNode::class,
+            'information' => Node\InformationNode::class,
+            'plugin' => Node\PluginNode::class,
+            'sni' => Node\SniNode::class,
+            'target' => Node\TargetNode::class,
+            'upstream' => Node\UpstreamNode::class,
         ];
     }
 

@@ -11,16 +11,16 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Document\PluginDocument as Document;
-use Unikorp\KongAdminApi\Node\Plugin as Node;
+use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
+use Unikorp\KongAdminApi\Node\ConsumerNode as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * plugin test
+ * consumer node test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class PluginTest extends TestCase
+class ConsumerNodeTest extends TestCase
 {
     /**
      * client
@@ -83,14 +83,14 @@ class PluginTest extends TestCase
     }
 
     /**
-     * test add plugin
+     * test create consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::addPlugin
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::createConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddPlugin()
+    public function testCreateConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -112,25 +112,25 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/apis/test-plugin/plugins/'),
+                $this->equalTo('/consumers/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addPlugin('test-plugin', $document);
+        $node->createConsumer($document);
     }
 
     /**
-     * test retrieve plugin
+     * test retrieve consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrievePlugin
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::retrieveConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrievePlugin()
+    public function testRetrieveConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -144,24 +144,24 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/plugins/test-plugin?'),
+                $this->equalTo('/consumers/test-consumer?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrievePlugin('test-plugin');
+        $node->retrieveConsumer('test-consumer');
     }
 
     /**
-     * test list all plugins
+     * test list consumers
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::listAllPlugins
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::listConsumers
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListAllPlugins()
+    public function testListConsumers()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -175,55 +175,24 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/plugins/?'),
+                $this->equalTo('/consumers/?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listAllPlugins();
+        $node->listConsumers();
     }
 
     /**
-     * test list plugins per api
+     * test update consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::listPluginsPerApi
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testListPluginsPerApi()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo('/apis/test-api/plugins/?'),
-                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
-            )
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->listPluginsPerApi('test-api');
-    }
-
-    /**
-     * test update plugin
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::updatePlugin
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::updateConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::patch
      */
-    public function testUpdatePlugin()
+    public function testUpdateConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -245,25 +214,25 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('/apis/test-api/plugins/id-plugin'),
+                $this->equalTo('/consumers/test-consumer'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updatePlugin('test-api', 'id-plugin', $document);
+        $node->updateConsumer('test-consumer', $document);
     }
 
     /**
-     * test update or add plugin
+     * test update or create consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::updateOrAddPlugin
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::updateOrCreateConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::put
      */
-    public function testUpdateOrAddPlugin()
+    public function testUpdateOrCreateConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -290,25 +259,25 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('put')
             ->with(
-                $this->equalTo('/apis/test-api/plugins/'),
+                $this->equalTo('/consumers/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateOrAddPlugin('test-api', $document);
+        $node->updateOrCreateConsumer($document);
     }
 
     /**
-     * test delete plugin
+     * test delete consumer
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::deletePlugin
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::deleteConsumer
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeletePlugin()
+    public function testDeleteConsumer()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -322,75 +291,13 @@ class PluginTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/apis/test-api/plugins/id-plugin'),
+                $this->equalTo('/consumers/test-consumer'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deletePlugin('test-api', 'id-plugin');
-    }
-
-    /**
-     * test retrieve enabled plugin
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrieveEnabledPlugin
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testRetrieveEnabledPlugin()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo('/plugins/enabled?'),
-                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
-            )
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->retrieveEnabledPlugin();
-    }
-
-    /**
-     * test retrieve plugin schema
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrievePluginSchema
-     * @covers \Unikorp\KongAdminApi\AbstractNode::get
-     */
-    public function testRetrievePluginSchema()
-    {
-        // stub `get http client` method from `client` mock
-        $this->client->expects($this->once())
-            ->method('getHttpClient')
-            ->will($this->returnValue($this->httpClient));
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
-
-        // stub `get` method from `http client` mock
-        $this->httpClient->expects($this->once())
-            ->method('get')
-            ->with(
-                $this->equalTo('/plugins/schema/test-plugin?'),
-                $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
-            )
-            ->will($this->returnValue($response));
-
-        $node = new Node($this->client);
-        $node->retrievePluginSchema('test-plugin');
+        $node->deleteConsumer('test-consumer');
     }
 }

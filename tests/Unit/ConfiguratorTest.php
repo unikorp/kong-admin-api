@@ -79,15 +79,15 @@ class ConfiguratorTest extends TestCase
         $this->assertArrayHasKey('sni', $nodes);
         $this->assertArrayHasKey('target', $nodes);
         $this->assertArrayHasKey('upstream', $nodes);
-        $this->assertSame(Node\Api::class, $nodes['api']);
-        $this->assertSame(Node\Certificate::class, $nodes['certificate']);
-        $this->assertSame(Node\Cluster::class, $nodes['cluster']);
-        $this->assertSame(Node\Consumer::class, $nodes['consumer']);
-        $this->assertSame(Node\Information::class, $nodes['information']);
-        $this->assertSame(Node\Plugin::class, $nodes['plugin']);
-        $this->assertSame(Node\Sni::class, $nodes['sni']);
-        $this->assertSame(Node\Target::class, $nodes['target']);
-        $this->assertSame(Node\Upstream::class, $nodes['upstream']);
+        $this->assertSame(Node\ApiNode::class, $nodes['api']);
+        $this->assertSame(Node\CertificateNode::class, $nodes['certificate']);
+        $this->assertSame(Node\ClusterNode::class, $nodes['cluster']);
+        $this->assertSame(Node\ConsumerNode::class, $nodes['consumer']);
+        $this->assertSame(Node\InformationNode::class, $nodes['information']);
+        $this->assertSame(Node\PluginNode::class, $nodes['plugin']);
+        $this->assertSame(Node\SniNode::class, $nodes['sni']);
+        $this->assertSame(Node\TargetNode::class, $nodes['target']);
+        $this->assertSame(Node\UpstreamNode::class, $nodes['upstream']);
     }
 
     /**
@@ -185,12 +185,12 @@ class ConfiguratorTest extends TestCase
         $reflectionProperty->setAccessible(true);
 
         // add node
-        $this->configurator->addNode('test', '\Unikorp\KongAdminApi\Node\Information');
+        $this->configurator->addNode('test', Node\InformationNode::class);
 
         // assert
         $nodes = $reflectionProperty->getValue($this->configurator);
         $this->assertArrayHasKey('test', $nodes);
-        $this->assertSame('\Unikorp\KongAdminApi\Node\Information', $nodes['test']);
+        $this->assertSame(Node\InformationNode::class, $nodes['test']);
     }
 
     /**
@@ -204,7 +204,7 @@ class ConfiguratorTest extends TestCase
      */
     public function testAddNodeWhenAlreadyExists()
     {
-        $this->configurator->addNode('api', '\Unikorp\KongAdminApi\Node\Api');
+        $this->configurator->addNode('api', Node\ApiNode::class);
     }
 
     /**
@@ -253,7 +253,7 @@ class ConfiguratorTest extends TestCase
      */
     public function testGetNodeWhenValidName()
     {
-        $this->assertSame(Node\Api::class, $this->configurator->getNode('api'));
+        $this->assertSame(Node\ApiNode::class, $this->configurator->getNode('api'));
     }
 
     /**

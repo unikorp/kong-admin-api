@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\SniDocument as Document;
 
 /**
- * sni
+ * sni node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Sni extends AbstractNode
+class SniNode extends AbstractNode
 {
     /**
      * add sni

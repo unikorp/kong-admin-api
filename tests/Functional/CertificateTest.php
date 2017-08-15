@@ -15,18 +15,18 @@ use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\CertificateDocument as Document;
-use Unikorp\KongAdminApi\Node\Certificate as Node;
+use Unikorp\KongAdminApi\Node\CertificateNode as Node;
 
 /**
  * certificate test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class CertificateTest extends TestCase
+class CertificateNodeTest extends TestCase
 {
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Certificate $node
+     * @param \Unikorp\KongAdminApi\Node\CertificateNode $node
      */
     private $node = null;
 
@@ -84,7 +84,7 @@ class CertificateTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::addCertificate
+     * @covers \Unikorp\KongAdminApi\Node\CertificateNode::addCertificate
      */
     public function testAddCertificate()
     {
@@ -111,7 +111,7 @@ class CertificateTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::retrieveCertificate
+     * @covers \Unikorp\KongAdminApi\Node\CertificateNode::retrieveCertificate
      */
     public function testRetrieveCertificate()
     {
@@ -135,7 +135,7 @@ class CertificateTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::listCertificates
+     * @covers \Unikorp\KongAdminApi\Node\CertificateNode::listCertificates
      */
     public function testListCertificates()
     {
@@ -161,7 +161,7 @@ class CertificateTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::updateCertificate
+     * @covers \Unikorp\KongAdminApi\Node\CertificateNode::updateCertificate
      */
     public function testUpdateCertificate()
     {
@@ -191,7 +191,7 @@ class CertificateTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::updateOrCreateCertificate
+     * @covers \Unikorp\KongAdminApi\Node\CertificateNode::updateOrCreateCertificate
      */
     public function testUpdateOrCreateCertificate()
     {
@@ -218,7 +218,7 @@ class CertificateTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::deleteCertificate
+     * @covers \Unikorp\KongAdminApi\Node\CertificateNode::deleteCertificate
      */
     public function testDeleteCertificate()
     {

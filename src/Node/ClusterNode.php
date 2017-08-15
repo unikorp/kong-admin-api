@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\ClusterDocument as Document;
 
 /**
- * cluster
+ * cluster node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Cluster extends AbstractNode
+class ClusterNode extends AbstractNode
 {
     /**
      * retrieve cluster status

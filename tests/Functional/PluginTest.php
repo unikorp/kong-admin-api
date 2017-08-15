@@ -16,14 +16,14 @@ use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\ApiDocument;
 use Unikorp\KongAdminApi\Document\PluginDocument as Document;
-use Unikorp\KongAdminApi\Node\Plugin as Node;
+use Unikorp\KongAdminApi\Node\PluginNode as Node;
 
 /**
  * plugin test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class PluginTest extends TestCase
+class PluginNodeTest extends TestCase
 {
     /**
      * client
@@ -33,7 +33,7 @@ class PluginTest extends TestCase
 
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Plugin $node
+     * @param \Unikorp\KongAdminApi\Node\PluginNode $node
      */
     private $node = null;
 
@@ -115,7 +115,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::addPlugin
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::addPlugin
      */
     public function testAddPlugin()
     {
@@ -144,7 +144,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrievePlugin
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::retrievePlugin
      */
     public function testRetrievePlugin()
     {
@@ -171,7 +171,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::listAllPlugins
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::listAllPlugins
      */
     public function testListAllPlugins()
     {
@@ -206,7 +206,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::listPluginsPerApi
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::listPluginsPerApi
      */
     public function testListPluginsPerApi()
     {
@@ -228,7 +228,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::updatePlugin
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::updatePlugin
      */
     public function testUpdatePlugin()
     {
@@ -262,7 +262,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::updateOrAddPlugin
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::updateOrAddPlugin
      */
     public function testUpdateOrAddPlugin()
     {
@@ -316,7 +316,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::deletePlugin
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::deletePlugin
      */
     public function testDeletePlugin()
     {
@@ -335,7 +335,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrieveEnabledPlugin
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::retrieveEnabledPlugin
      */
     public function testRetrieveEnabledPlugin()
     {
@@ -384,7 +384,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Plugin::retrievePluginSchema
+     * @covers \Unikorp\KongAdminApi\Node\PluginNode::retrievePluginSchema
      */
     public function testRetrievePluginSchema()
     {

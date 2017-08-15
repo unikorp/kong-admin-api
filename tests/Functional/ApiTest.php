@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\ApiDocument as Document;
-use Unikorp\KongAdminApi\Node\Api as Node;
+use Unikorp\KongAdminApi\Node\ApiNode as Node;
 
 /**
  * api test
@@ -26,7 +26,7 @@ class ApiTest extends TestCase
 {
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Api $node
+     * @param \Unikorp\KongAdminApi\Node\ApiNode $node
      */
     private $node = null;
 
@@ -92,7 +92,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::addApi
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::addApi
      */
     public function testAddApi()
     {
@@ -124,7 +124,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::retrieveApi
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::retrieveApi
      */
     public function testRetrieveApi()
     {
@@ -148,7 +148,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::listApis
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::listApis
      */
     public function testListApis()
     {
@@ -183,7 +183,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::updateApi
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::updateApi
      */
     public function testUpdateApi()
     {
@@ -215,7 +215,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::updateOrCreateApi
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::updateOrCreateApi
      */
     public function testUpdateOrCreateApi()
     {
@@ -247,7 +247,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Api::deleteApi
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::deleteApi
      */
     public function testDeleteApi()
     {

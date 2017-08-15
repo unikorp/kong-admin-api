@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
 
 /**
- * consumer
+ * consumer node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Consumer extends AbstractNode
+class ConsumerNode extends AbstractNode
 {
     /**
      * create consumer

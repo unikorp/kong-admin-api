@@ -11,16 +11,16 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Document\TargetDocument as Document;
-use Unikorp\KongAdminApi\Node\Target as Node;
+use Unikorp\KongAdminApi\Document\SniDocument as Document;
+use Unikorp\KongAdminApi\Node\SniNode as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * target test
+ * sni node test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class TargetTest extends TestCase
+class SniNodeTest extends TestCase
 {
     /**
      * client
@@ -83,14 +83,14 @@ class TargetTest extends TestCase
     }
 
     /**
-     * test add target
+     * test add sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::addTarget
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::addSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddTarget()
+    public function testAddSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -112,25 +112,25 @@ class TargetTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/upstreams/test-upstream/targets'),
+                $this->equalTo('/snis/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addTarget('test-upstream', $document);
+        $node->addSni($document);
     }
 
     /**
-     * test list targets
+     * test retrieve sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::listTargets
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::retrieveSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListTargets()
+    public function testRetrieveSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -144,24 +144,24 @@ class TargetTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/upstreams/test-upstream/targets?'),
+                $this->equalTo('/snis/test-sni?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listTargets('test-upstream');
+        $node->retrieveSni('test-sni');
     }
 
     /**
-     * test list active targets
+     * test list snis
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::listActiveTargets
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::listSnis
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListActiveTargets()
+    public function testListSnis()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -175,24 +175,109 @@ class TargetTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/upstreams/test-upstream/targets/active?'),
+                $this->equalTo('/snis/?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listActiveTargets('test-upstream');
+        $node->listSnis();
     }
 
     /**
-     * test delete target
+     * test update sni
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::deleteTarget
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::updateSni
+     * @covers \Unikorp\KongAdminApi\AbstractNode::patch
+     */
+    public function testUpdateSni()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // mock `document`
+        $document = $this->createMock(Document::class);
+
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `get` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('/snis/test-sni'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->updateSni('test-sni', $document);
+    }
+
+    /**
+     * test update or create sni
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::updateOrCreateSni
+     * @covers \Unikorp\KongAdminApi\AbstractNode::put
+     */
+    public function testUpdateOrCreateSni()
+    {
+        // stub `get http client` method from `client` mock
+        $this->client->expects($this->once())
+            ->method('getHttpClient')
+            ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // mock `document`
+        $document = $this->createMock(Document::class);
+
+        // stub `set created at` method from `document` mock
+        $document->expects($this->once())
+            ->method('setCreatedAt')
+            ->with($this->isType('int'));
+
+        // stub `to json` method from `document` mock
+        $document->expects($this->once())
+            ->method('toJson')
+            ->will($this->returnValue('{"test":true}'));
+
+        // stub `get` method from `http client` mock
+        $this->httpClient->expects($this->once())
+            ->method('put')
+            ->with(
+                $this->equalTo('/snis/'),
+                $this->equalTo(['Content-Type' => 'application/json']),
+                $this->equalTo('{"test":true}')
+            )
+            ->will($this->returnValue($response));
+
+        $node = new Node($this->client);
+        $node->updateOrCreateSni($document);
+    }
+
+    /**
+     * test delete sni
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::deleteSni
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeleteTarget()
+    public function testDeleteSni()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -206,13 +291,13 @@ class TargetTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/upstreams/test-upstream/targets/test-target'),
+                $this->equalTo('/snis/test-sni'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deleteTarget('test-upstream', 'test-target');
+        $node->deleteSni('test-sni');
     }
 }
