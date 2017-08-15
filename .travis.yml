@@ -31,14 +31,26 @@ before_deploy:
     - php sami.phar update .sami.php
 
 deploy:
-    provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    region: eu-west-2
-    bucket: unikorp-docs
-    local_dir: build/api
-    upload-dir: kong-admin-api/master
-    skip_cleanup: true
+    - provider: s3
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
+      region: eu-west-2
+      bucket: docs.unikorp.io
+      local_dir: build/api
+      upload-dir: kong-admin-api/api/master
+      skip_cleanup: true
+      on:
+        branch: master
+    - provider: s3
+      access_key_id: $AWS_ACCESS_KEY
+      secret_access_key: $AWS_SECRET_KEY
+      region: eu-west-2
+      bucket: docs.unikorp.io
+      local_dir: build/api
+      upload-dir: kong-admin-api/api/$TRAVIS_TAG
+      skip_cleanup: true
+      on:
+        tags: true
 
 after_script:
     ## Scrutinizer
