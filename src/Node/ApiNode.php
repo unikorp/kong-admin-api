@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\ApiDocument as Document;
 
 /**
- * api
+ * api node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Api extends AbstractNode
+class ApiNode extends AbstractNode
 {
     /**
      * add api

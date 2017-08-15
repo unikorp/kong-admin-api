@@ -15,11 +15,11 @@ use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
 
 /**
- * information
+ * information node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Information extends AbstractNode
+class InformationNode extends AbstractNode
 {
     /**
      * retrieve node information

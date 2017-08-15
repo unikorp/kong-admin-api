@@ -16,11 +16,11 @@ use Unikorp\KongAdminApi\AbstractNode;
 use Unikorp\KongAdminApi\Document\CertificateDocument as Document;
 
 /**
- * certificate
+ * certificate node
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Certificate extends AbstractNode
+class CertificateNode extends AbstractNode
 {
     /**
      * add certificate
