@@ -14,70 +14,70 @@ namespace Unikorp\KongAdminApi\Document;
 use Unikorp\KongAdminApi\AbstractDocument;
 
 /**
- * consumer
+ * sni document
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Consumer extends AbstractDocument
+class SniDocument extends AbstractDocument
 {
     /**
-     * username
-     * @var string $username
+     * name
+     * @var string $name
      */
-    protected $username = null;
+    protected $name = null;
 
     /**
-     * custom id
-     * @var string $customId
+     * ssl certificate id
+     * @var string $sslCertificateId
      */
-    protected $customId = null;
+    protected $sslCertificateId = null;
 
     /**
-     * set username
+     * set name
      *
-     * @param string $username
+     * @param string $name
      *
      * @return this
      */
-    public function setUsername(string $username): self
+    public function setName(string $name): self
     {
-        $this->username = $username;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * get username
+     * get name
      *
      * @return string
      */
-    public function getUsername(): string
+    public function getName(): string
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
-     * set custom id
+     * set ssl certificate id
      *
-     * @param string $customId
+     * @param string $sslCertificateId
      *
      * @return this
      */
-    public function setCustomId(string $customId): self
+    public function setSslCertificateId(string $sslCertificateId): self
     {
-        $this->customId = $customId;
+        $this->sslCertificateId = $sslCertificateId;
 
         return $this;
     }
 
     /**
-     * get custom id
+     * get ssl certificate id
      *
      * @return string
      */
-    public function getCustomId(): string
+    public function getSslCertificateId(): string
     {
-        return $this->customId;
+        return $this->sslCertificateId;
     }
 
     /**
@@ -88,8 +88,8 @@ class Consumer extends AbstractDocument
     protected function getFields(): array
     {
         return [
-            'username',
-            'customId',
+            'name',
+            'sslCertificateId',
         ];
     }
 }

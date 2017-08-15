@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Sni as Document;
+use Unikorp\KongAdminApi\Document\UpstreamDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * sni test
+ * upstream document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class SniTest extends TestCase
+class UpstreamDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Sni $document
+     * @var \Unikorp\KongAdminApi\Document\UpstreamDocument $document
      */
     private $document = null;
 
@@ -56,7 +56,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::setName
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::setName
      */
     public function testSetName()
     {
@@ -70,7 +70,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getName
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::getName
      */
     public function testGetName()
     {
@@ -87,38 +87,73 @@ class SniTest extends TestCase
     }
 
     /**
-     * test set ssl certificate id
+     * test set slots
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::setSslCertificateId
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::setSlots
      */
-    public function testSetSslCertificateId()
+    public function testSetSlots()
     {
         // asserts
-        $this->document->setSslCertificateId('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'sslCertificateId'));
+        $this->document->setSlots(65536);
+        $this->assertSame(65536, $this->readAttribute($this->document, 'slots'));
     }
 
     /**
-     * test get ssl certificate id
+     * test get slots
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getSslCertificateId
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::getSlots
      */
-    public function testGetSslCertificateId()
+    public function testGetSlots()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `sslCertificateId` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('sslCertificateId');
+        // set `slots` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('slots');
         $reflectionProperty->setAccessible(true);
 
         // assert
-        $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getSslCertificateId());
+        $reflectionProperty->setValue($this->document, 65536);
+        $this->assertSame(65536, $this->document->getSlots());
+    }
+
+    /**
+     * test set orderlist
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::setOrderlist
+     */
+    public function testSetOrderlist()
+    {
+        // asserts
+        $this->document->setOrderlist([1, 2, 7, 9, 6, 3]);
+        $this->assertSame([1, 2, 7, 9, 6, 3], $this->readAttribute($this->document, 'orderlist'));
+    }
+
+    /**
+     * test get orderlist
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::getOrderlist
+     */
+    public function testGetOrderlist()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `orderlist` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('orderlist');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, [1, 2, 7, 9, 6, 3]);
+        $this->assertSame([1, 2, 7, 9, 6, 3], $this->document->getOrderlist());
     }
 
     /**
@@ -234,20 +269,21 @@ class SniTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getFields
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
     {
         $this->document
             ->setName('name')
-            ->setSslCertificateId('sslCertificateId')
+            ->setSlots(65536)
+            ->setOrderlist([1, 2, 7, 9, 6, 3])
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            '{"name":"name","ssl_certificate_id":"sslCertificateId","created_at":42,"size":50,"offset":"offset"}',
+            '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3],"created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -259,20 +295,21 @@ class SniTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Sni::getFields
+     * @covers \Unikorp\KongAdminApi\Document\UpstreamDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()
     {
         $this->document
             ->setName('name')
-            ->setSslCertificateId('sslCertificateId')
+            ->setSlots(65536)
+            ->setOrderlist([1, 2, 7, 9, 6, 3])
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            'name=name&ssl_certificate_id=sslCertificateId&created_at=42&size=50&offset=offset',
+            'name=name&slots=65536&orderlist%5B0%5D=1&orderlist%5B1%5D=2&orderlist%5B2%5D=7&orderlist%5B3%5D=9&orderlist%5B4%5D=6&orderlist%5B5%5D=3&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }

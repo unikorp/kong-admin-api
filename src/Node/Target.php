@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Target as Document;
+use Unikorp\KongAdminApi\Document\TargetDocument as Document;
 
 /**
  * target
@@ -26,7 +26,7 @@ class Target extends AbstractNode
      * add target
      *
      * @param string $nameOrId
-     * @param \Unikorp\KongAdminApi\Document\Target $document
+     * @param \Unikorp\KongAdminApi\Document\TargetDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -39,7 +39,7 @@ class Target extends AbstractNode
      * list targets
      *
      * @param string $nameOrId
-     * @param \Unikorp\KongAdminApi\Document\Target $document
+     * @param \Unikorp\KongAdminApi\Document\TargetDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

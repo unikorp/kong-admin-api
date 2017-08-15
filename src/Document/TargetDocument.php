@@ -14,70 +14,70 @@ namespace Unikorp\KongAdminApi\Document;
 use Unikorp\KongAdminApi\AbstractDocument;
 
 /**
- * cluster
+ * target document
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Cluster extends AbstractDocument
+class TargetDocument extends AbstractDocument
 {
     /**
-     * name
-     * @var string $name
+     * target
+     * @var string $target
      */
-    protected $name = null;
+    protected $target = null;
 
     /**
-     * address
-     * @var string $address
+     * weight
+     * @var int $weight
      */
-    protected $address = null;
+    protected $weight = 100;
 
     /**
-     * set name
+     * set target
      *
-     * @param string $name
+     * @param string $target
      *
      * @return this
      */
-    public function setName(string $name): self
+    public function setTarget(string $target): self
     {
-        $this->name = $name;
+        $this->target = $target;
 
         return $this;
     }
 
     /**
-     * get name
+     * get target
      *
      * @return string
      */
-    public function getName(): string
+    public function getTarget(): string
     {
-        return $this->name;
+        return $this->target;
     }
 
     /**
-     * set address
+     * set weight
      *
-     * @param string $address
+     * @param int $weight
      *
      * @return this
      */
-    public function setAddress(string $address): self
+    public function setWeight(int $weight): self
     {
-        $this->address = $address;
+        $this->weight = $weight;
 
         return $this;
     }
 
     /**
-     * get address
+     * get weight
      *
-     * @return string
+     * @return int
      */
-    public function getAddress(): string
+    public function getWeight(): int
     {
-        return $this->address;
+        return $this->weight;
     }
 
     /**
@@ -88,8 +88,8 @@ class Cluster extends AbstractDocument
     protected function getFields(): array
     {
         return [
-            'name',
-            'address',
+            'target',
+            'weight',
         ];
     }
 }

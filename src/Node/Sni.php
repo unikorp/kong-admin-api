@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Sni as Document;
+use Unikorp\KongAdminApi\Document\SniDocument as Document;
 
 /**
  * sni
@@ -25,7 +25,7 @@ class Sni extends AbstractNode
     /**
      * add sni
      *
-     * @param \Unikorp\KongAdminApi\Document\Sni $document
+     * @param \Unikorp\KongAdminApi\Document\SniDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -60,7 +60,7 @@ class Sni extends AbstractNode
      * update sni
      *
      * @param string $name
-     * @param \Unikorp\KongAdminApi\Document\Sni $document
+     * @param \Unikorp\KongAdminApi\Document\SniDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -72,7 +72,7 @@ class Sni extends AbstractNode
     /**
      * update or create sni
      *
-     * @param \Unikorp\KongAdminApi\Document\Sni $document
+     * @param \Unikorp\KongAdminApi\Document\SniDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

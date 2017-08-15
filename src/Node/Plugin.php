@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Plugin as Document;
+use Unikorp\KongAdminApi\Document\PluginDocument as Document;
 
 /**
  * plugin
@@ -26,7 +26,7 @@ class Plugin extends AbstractNode
      * add plugin
      *
      * @param string $nameOrId
-     * @param \Unikorp\KongAdminApi\Document\Plugin $document
+     * @param \Unikorp\KongAdminApi\Document\PluginDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -50,7 +50,7 @@ class Plugin extends AbstractNode
     /**
      * list all plugins
      *
-     * @param \Unikorp\KongAdminApi\Document\Plugin $document
+     * @param \Unikorp\KongAdminApi\Document\PluginDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -76,7 +76,7 @@ class Plugin extends AbstractNode
      *
      * @param string $apiNameOrId
      * @param string $id
-     * @param \Unikorp\KongAdminApi\Document\Plugin $document
+     * @param \Unikorp\KongAdminApi\Document\PluginDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -89,7 +89,7 @@ class Plugin extends AbstractNode
      * update or add plugin
      *
      * @param string $apiNameOrId
-     * @param \Unikorp\KongAdminApi\Document\Plugin $document
+     * @param \Unikorp\KongAdminApi\Document\PluginDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

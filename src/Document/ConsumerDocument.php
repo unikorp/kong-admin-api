@@ -14,70 +14,70 @@ namespace Unikorp\KongAdminApi\Document;
 use Unikorp\KongAdminApi\AbstractDocument;
 
 /**
- * target
+ * consumer document
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Target extends AbstractDocument
+class ConsumerDocument extends AbstractDocument
 {
     /**
-     * target
-     * @var string $target
+     * username
+     * @var string $username
      */
-    protected $target = null;
+    protected $username = null;
 
     /**
-     * weight
-     * @var int $weight
+     * custom id
+     * @var string $customId
      */
-    protected $weight = 100;
+    protected $customId = null;
 
     /**
-     * set target
+     * set username
      *
-     * @param string $target
+     * @param string $username
      *
      * @return this
      */
-    public function setTarget(string $target): self
+    public function setUsername(string $username): self
     {
-        $this->target = $target;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * get target
+     * get username
      *
      * @return string
      */
-    public function getTarget(): string
+    public function getUsername(): string
     {
-        return $this->target;
+        return $this->username;
     }
 
     /**
-     * set weight
+     * set custom id
      *
-     * @param int $weight
+     * @param string $customId
      *
      * @return this
      */
-    public function setWeight(int $weight): self
+    public function setCustomId(string $customId): self
     {
-        $this->weight = $weight;
+        $this->customId = $customId;
 
         return $this;
     }
 
     /**
-     * get weight
+     * get custom id
      *
-     * @return int
+     * @return string
      */
-    public function getWeight(): int
+    public function getCustomId(): string
     {
-        return $this->weight;
+        return $this->customId;
     }
 
     /**
@@ -88,8 +88,8 @@ class Target extends AbstractDocument
     protected function getFields(): array
     {
         return [
-            'target',
-            'weight',
+            'username',
+            'customId',
         ];
     }
 }

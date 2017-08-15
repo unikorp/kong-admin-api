@@ -11,6 +11,7 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
+use Unikorp\KongAdminApi\Document\PluginDocument as Document;
 use Unikorp\KongAdminApi\Node\Plugin as Node;
 use PHPUnit\Framework\TestCase;
 
@@ -97,7 +98,7 @@ class PluginTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Plugin');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -230,7 +231,7 @@ class PluginTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Plugin');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -270,7 +271,7 @@ class PluginTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Plugin');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');

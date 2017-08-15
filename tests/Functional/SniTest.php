@@ -14,8 +14,8 @@ namespace Unikorp\KongAdminApi\Tests\Functional;
 use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
-use Unikorp\KongAdminApi\Document\Certificate;
-use Unikorp\KongAdminApi\Document\Sni as Document;
+use Unikorp\KongAdminApi\Document\CertificateDocument;
+use Unikorp\KongAdminApi\Document\SniDocument as Document;
 use Unikorp\KongAdminApi\Node\Sni as Node;
 
 /**
@@ -66,7 +66,7 @@ class SniTest extends TestCase
         $this->node->addSni($document);
 
         // fixture: add certificate
-        $document = new Certificate();
+        $document = new CertificateDocument();
         $document
             ->setCert('-----BEGIN CERTIFICATE----- TestCertificate ...')
             ->setKey('-----BEGIN RSA PRIVATE KEY----- TestCertificate ...');

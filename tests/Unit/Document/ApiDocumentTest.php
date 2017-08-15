@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Api as Document;
+use Unikorp\KongAdminApi\Document\ApiDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * api test
+ * api document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class ApiTest extends TestCase
+class ApiDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Api $document
+     * @var \Unikorp\KongAdminApi\Document\ApiDocument $document
      */
     private $document = null;
 
@@ -56,7 +56,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setName
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setName
      */
     public function testSetName()
     {
@@ -70,7 +70,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getName
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getName
      */
     public function testGetName()
     {
@@ -91,7 +91,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setHosts
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setHosts
      */
     public function testSetHosts()
     {
@@ -105,7 +105,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getHosts
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getHosts
      */
     public function testGetHosts()
     {
@@ -126,7 +126,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setUris
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setUris
      */
     public function testSetUris()
     {
@@ -140,7 +140,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getUris
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getUris
      */
     public function testGetUris()
     {
@@ -161,7 +161,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setMethods
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setMethods
      */
     public function testSetMethods()
     {
@@ -175,7 +175,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getMethods
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getMethods
      */
     public function testGetMethods()
     {
@@ -196,7 +196,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setUpstreamUrl
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setUpstreamUrl
      */
     public function testSetUpstreamUrl()
     {
@@ -210,7 +210,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getUpstreamUrl
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getUpstreamUrl
      */
     public function testGetUpstreamUrl()
     {
@@ -231,7 +231,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setStripUri
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setStripUri
      */
     public function testSetStripUri()
     {
@@ -245,7 +245,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getStripUri
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getStripUri
      */
     public function testGetStripUri()
     {
@@ -266,7 +266,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setPreserveHost
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setPreserveHost
      */
     public function testSetPreserveHost()
     {
@@ -280,7 +280,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getPreserveHost
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getPreserveHost
      */
     public function testGetPreserveHost()
     {
@@ -301,7 +301,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setRetries
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setRetries
      */
     public function testSetRetries()
     {
@@ -315,7 +315,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getRetries
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getRetries
      */
     public function testGetRetries()
     {
@@ -336,7 +336,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setUpstreamConnectTimeout
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setUpstreamConnectTimeout
      */
     public function testSetUpstreamConnectTimeout()
     {
@@ -350,7 +350,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getUpstreamConnectTimeout
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getUpstreamConnectTimeout
      */
     public function testGetUpstreamConnectTimeout()
     {
@@ -371,7 +371,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setUpstreamSendTimeout
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setUpstreamSendTimeout
      */
     public function testSetUpstreamSendTimeout()
     {
@@ -385,7 +385,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getUpstreamSendTimeout
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getUpstreamSendTimeout
      */
     public function testGetUpstreamSendTimeout()
     {
@@ -406,7 +406,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setUpstreamReadTimeout
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setUpstreamReadTimeout
      */
     public function testSetUpstreamReadTimeout()
     {
@@ -420,7 +420,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getUpstreamReadTimeout
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getUpstreamReadTimeout
      */
     public function testGetUpstreamReadTimeout()
     {
@@ -441,7 +441,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setHttpsOnly
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setHttpsOnly
      */
     public function testSetHttpsOnly()
     {
@@ -455,7 +455,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getHttpsOnly
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getHttpsOnly
      */
     public function testGetHttpsOnly()
     {
@@ -476,7 +476,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::setHttpIfTerminated
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::setHttpIfTerminated
      */
     public function testSetHttpIfTerminated()
     {
@@ -490,7 +490,7 @@ class ApiTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Api::getHttpIfTerminated
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getHttpIfTerminated
      */
     public function testGetHttpIfTerminated()
     {
@@ -619,7 +619,7 @@ class ApiTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Api::getFields
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
@@ -655,7 +655,7 @@ class ApiTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Api::getFields
+     * @covers \Unikorp\KongAdminApi\Document\ApiDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()

@@ -14,11 +14,11 @@ namespace Unikorp\KongAdminApi\Document;
 use Unikorp\KongAdminApi\AbstractDocument;
 
 /**
- * sni
+ * cluster document
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Sni extends AbstractDocument
+class ClusterDocument extends AbstractDocument
 {
     /**
      * name
@@ -27,10 +27,10 @@ class Sni extends AbstractDocument
     protected $name = null;
 
     /**
-     * ssl certificate id
-     * @var string $sslCertificateId
+     * address
+     * @var string $address
      */
-    protected $sslCertificateId = null;
+    protected $address = null;
 
     /**
      * set name
@@ -57,27 +57,27 @@ class Sni extends AbstractDocument
     }
 
     /**
-     * set ssl certificate id
+     * set address
      *
-     * @param string $sslCertificateId
+     * @param string $address
      *
      * @return this
      */
-    public function setSslCertificateId(string $sslCertificateId): self
+    public function setAddress(string $address): self
     {
-        $this->sslCertificateId = $sslCertificateId;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * get ssl certificate id
+     * get address
      *
      * @return string
      */
-    public function getSslCertificateId(): string
+    public function getAddress(): string
     {
-        return $this->sslCertificateId;
+        return $this->address;
     }
 
     /**
@@ -89,7 +89,7 @@ class Sni extends AbstractDocument
     {
         return [
             'name',
-            'sslCertificateId',
+            'address',
         ];
     }
 }

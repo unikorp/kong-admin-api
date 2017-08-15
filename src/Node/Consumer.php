@@ -13,7 +13,7 @@ namespace Unikorp\KongAdminApi\Node;
 
 use Psr\Http\Message\ResponseInterface;
 use Unikorp\KongAdminApi\AbstractNode;
-use Unikorp\KongAdminApi\Document\Consumer as Document;
+use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
 
 /**
  * consumer
@@ -25,7 +25,7 @@ class Consumer extends AbstractNode
     /**
      * create consumer
      *
-     * @param \Unikorp\KongAdminApi\Document\Consumer $document
+     * @param \Unikorp\KongAdminApi\Document\ConsumerDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -49,7 +49,7 @@ class Consumer extends AbstractNode
     /**
      * list consumers
      *
-     * @param \Unikorp\KongAdminApi\Document\Consumer $document
+     * @param \Unikorp\KongAdminApi\Document\ConsumerDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -62,7 +62,7 @@ class Consumer extends AbstractNode
      * update consumer
      *
      * @param string $usernameOrId
-     * @param \Unikorp\KongAdminApi\Document\Consumer $document
+     * @param \Unikorp\KongAdminApi\Document\ConsumerDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -74,7 +74,7 @@ class Consumer extends AbstractNode
     /**
      * update or create consumer
      *
-     * @param \Unikorp\KongAdminApi\Document\Consumer $document
+     * @param \Unikorp\KongAdminApi\Document\ConsumerDocument $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */

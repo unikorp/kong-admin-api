@@ -14,11 +14,11 @@ namespace Unikorp\KongAdminApi\Document;
 use Unikorp\KongAdminApi\AbstractDocument;
 
 /**
- * api
+ * api document
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class Api extends AbstractDocument
+class ApiDocument extends AbstractDocument
 {
     /**
      * name

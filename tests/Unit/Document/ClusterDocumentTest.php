@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Target as Document;
+use Unikorp\KongAdminApi\Document\ClusterDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * target test
+ * cluster document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class TargetTest extends TestCase
+class ClusterDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Target $document
+     * @var \Unikorp\KongAdminApi\Document\ClusterDocument $document
      */
     private $document = null;
 
@@ -52,73 +52,73 @@ class TargetTest extends TestCase
     }
 
     /**
-     * test set target
+     * test set name
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Target::setTarget
+     * @covers \Unikorp\KongAdminApi\Document\ClusterDocument::setName
      */
-    public function testSetTarget()
+    public function testSetName()
     {
         // asserts
-        $this->document->setTarget('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'target'));
+        $this->document->setName('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'name'));
     }
 
     /**
-     * test get target
+     * test get name
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Target::getTarget
+     * @covers \Unikorp\KongAdminApi\Document\ClusterDocument::getName
      */
-    public function testGetTarget()
+    public function testGetName()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
         // set `name` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('target');
+        $reflectionProperty = $reflectionClass->getProperty('name');
         $reflectionProperty->setAccessible(true);
 
         // assert
         $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getTarget());
+        $this->assertSame('test', $this->document->getName());
     }
 
     /**
-     * test set weight
+     * test set address
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Target::setWeight
+     * @covers \Unikorp\KongAdminApi\Document\ClusterDocument::setAddress
      */
-    public function testSetWeight()
+    public function testSetAddress()
     {
         // asserts
-        $this->document->setWeight(1000);
-        $this->assertSame(1000, $this->readAttribute($this->document, 'weight'));
+        $this->document->setAddress('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'address'));
     }
 
     /**
-     * test get weight
+     * test get address
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Target::getWeight
+     * @covers \Unikorp\KongAdminApi\Document\ClusterDocument::getAddress
      */
-    public function testGetWeight()
+    public function testGetAddress()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `name` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('weight');
+        // set `address` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('address');
         $reflectionProperty->setAccessible(true);
 
         // assert
-        $reflectionProperty->setValue($this->document, 1000);
-        $this->assertSame(1000, $this->document->getWeight());
+        $reflectionProperty->setValue($this->document, 'test');
+        $this->assertSame('test', $this->document->getAddress());
     }
 
     /**
@@ -234,20 +234,20 @@ class TargetTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Target::getFields
+     * @covers \Unikorp\KongAdminApi\Document\ClusterDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
     {
         $this->document
-            ->setTarget('target')
-            ->setWeight(1000)
+            ->setName('name')
+            ->setAddress('address')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            '{"target":"target","weight":1000,"created_at":42,"size":50,"offset":"offset"}',
+            '{"name":"name","address":"address","created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -259,20 +259,20 @@ class TargetTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Target::getFields
+     * @covers \Unikorp\KongAdminApi\Document\ClusterDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()
     {
         $this->document
-            ->setTarget('target')
-            ->setWeight(1000)
+            ->setName('name')
+            ->setAddress('address')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            'target=target&weight=1000&created_at=42&size=50&offset=offset',
+            'name=name&address=address&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }

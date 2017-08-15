@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Upstream as Document;
+use Unikorp\KongAdminApi\Document\CertificateDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * upstream test
+ * certificate document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class UpstreamTest extends TestCase
+class CertificateDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Upstream $document
+     * @var \Unikorp\KongAdminApi\Document\CertificateDocument $document
      */
     private $document = null;
 
@@ -52,108 +52,108 @@ class UpstreamTest extends TestCase
     }
 
     /**
-     * test set name
+     * test set cert
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::setName
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::setCert
      */
-    public function testSetName()
+    public function testSetCert()
     {
         // asserts
-        $this->document->setName('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'name'));
+        $this->document->setCert('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'cert'));
     }
 
     /**
-     * test get name
+     * test get cert
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::getName
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::getCert
      */
-    public function testGetName()
+    public function testGetCert()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `name` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('name');
+        // set `cert` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('cert');
         $reflectionProperty->setAccessible(true);
 
         // assert
         $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getName());
+        $this->assertSame('test', $this->document->getCert());
     }
 
     /**
-     * test set slots
+     * test set key
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::setSlots
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::setKey
      */
-    public function testSetSlots()
+    public function testSetKey()
     {
         // asserts
-        $this->document->setSlots(65536);
-        $this->assertSame(65536, $this->readAttribute($this->document, 'slots'));
+        $this->document->setKey('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'key'));
     }
 
     /**
-     * test get slots
+     * test get key
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::getSlots
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::getKey
      */
-    public function testGetSlots()
+    public function testGetKey()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `slots` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('slots');
+        // set `key` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('key');
         $reflectionProperty->setAccessible(true);
 
         // assert
-        $reflectionProperty->setValue($this->document, 65536);
-        $this->assertSame(65536, $this->document->getSlots());
+        $reflectionProperty->setValue($this->document, 'test');
+        $this->assertSame('test', $this->document->getKey());
     }
 
     /**
-     * test set orderlist
+     * test set snis
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::setOrderlist
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::setSnis
      */
-    public function testSetOrderlist()
+    public function testSetSnis()
     {
         // asserts
-        $this->document->setOrderlist([1, 2, 7, 9, 6, 3]);
-        $this->assertSame([1, 2, 7, 9, 6, 3], $this->readAttribute($this->document, 'orderlist'));
+        $this->document->setSnis('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'snis'));
     }
 
     /**
-     * test get orderlist
+     * test get snis
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::getOrderlist
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::getSnis
      */
-    public function testGetOrderlist()
+    public function testGetSnis()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `orderlist` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('orderlist');
+        // set `snis` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('snis');
         $reflectionProperty->setAccessible(true);
 
         // assert
-        $reflectionProperty->setValue($this->document, [1, 2, 7, 9, 6, 3]);
-        $this->assertSame([1, 2, 7, 9, 6, 3], $this->document->getOrderlist());
+        $reflectionProperty->setValue($this->document, 'test');
+        $this->assertSame('test', $this->document->getSnis());
     }
 
     /**
@@ -269,21 +269,21 @@ class UpstreamTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::getFields
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
     {
         $this->document
-            ->setName('name')
-            ->setSlots(65536)
-            ->setOrderlist([1, 2, 7, 9, 6, 3])
+            ->setCert('cert')
+            ->setKey('key')
+            ->setSnis('snis')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            '{"name":"name","slots":65536,"orderlist":[1,2,7,9,6,3],"created_at":42,"size":50,"offset":"offset"}',
+            '{"cert":"cert","key":"key","snis":"snis","created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -295,21 +295,21 @@ class UpstreamTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Upstream::getFields
+     * @covers \Unikorp\KongAdminApi\Document\CertificateDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()
     {
         $this->document
-            ->setName('name')
-            ->setSlots(65536)
-            ->setOrderlist([1, 2, 7, 9, 6, 3])
+            ->setCert('cert')
+            ->setKey('key')
+            ->setSnis('snis')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            'name=name&slots=65536&orderlist%5B0%5D=1&orderlist%5B1%5D=2&orderlist%5B2%5D=7&orderlist%5B3%5D=9&orderlist%5B4%5D=6&orderlist%5B5%5D=3&created_at=42&size=50&offset=offset',
+            'cert=cert&key=key&snis=snis&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }
