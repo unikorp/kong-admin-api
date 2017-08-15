@@ -14,18 +14,18 @@ namespace Unikorp\KongAdminApi\Tests\Functional;
 use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
-use Unikorp\KongAdminApi\Node\Information as Node;
+use Unikorp\KongAdminApi\Node\InformationNode as Node;
 
 /**
  * information test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class InformationTest extends TestCase
+class InformationNodeTest extends TestCase
 {
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Information $node
+     * @param \Unikorp\KongAdminApi\Node\InformationNode $node
      */
     private $node = null;
 
@@ -69,7 +69,7 @@ class InformationTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Information::retrieveNodeInformation
+     * @covers \Unikorp\KongAdminApi\Node\InformationNode::retrieveNodeInformation
      */
     public function testRetreiveNodeInformation()
     {
@@ -89,7 +89,7 @@ class InformationTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Information::retrieveNodeStatus
+     * @covers \Unikorp\KongAdminApi\Node\InformationNode::retrieveNodeStatus
      */
     public function testRetreiveNodeStatus()
     {

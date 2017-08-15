@@ -16,14 +16,14 @@ use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\TargetDocument as Document;
 use Unikorp\KongAdminApi\Document\UpstreamDocument;
-use Unikorp\KongAdminApi\Node\Target as Node;
+use Unikorp\KongAdminApi\Node\TargetNode as Node;
 
 /**
  * target test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class TargetTest extends TestCase
+class TargetNodeTest extends TestCase
 {
     /**
      * client
@@ -33,7 +33,7 @@ class TargetTest extends TestCase
 
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Target $node
+     * @param \Unikorp\KongAdminApi\Node\TargetNode $node
      */
     private $node = null;
 
@@ -108,7 +108,7 @@ class TargetTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::addTarget
+     * @covers \Unikorp\KongAdminApi\Node\TargetNode::addTarget
      */
     public function testAddTarget()
     {
@@ -133,7 +133,7 @@ class TargetTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::listTargets
+     * @covers \Unikorp\KongAdminApi\Node\TargetNode::listTargets
      */
     public function testListTargets()
     {
@@ -169,7 +169,7 @@ class TargetTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::listActiveTargets
+     * @covers \Unikorp\KongAdminApi\Node\TargetNode::listActiveTargets
      */
     public function testListActiveTargets()
     {
@@ -195,7 +195,7 @@ class TargetTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Target::deleteTarget
+     * @covers \Unikorp\KongAdminApi\Node\TargetNode::deleteTarget
      */
     public function testDeleteTarget()
     {

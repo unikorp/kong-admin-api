@@ -11,16 +11,16 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
-use Unikorp\KongAdminApi\Node\Consumer as Node;
+use Unikorp\KongAdminApi\Document\ApiDocument as Document;
+use Unikorp\KongAdminApi\Node\ApiNode as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * consumer test
+ * api node test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class ConsumerTest extends TestCase
+class ApiNodeTest extends TestCase
 {
     /**
      * client
@@ -83,14 +83,14 @@ class ConsumerTest extends TestCase
     }
 
     /**
-     * test create consumer
+     * test add api
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::createConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::addApi
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testCreateConsumer()
+    public function testAddApi()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -112,25 +112,25 @@ class ConsumerTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/consumers/'),
+                $this->equalTo('/apis/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->createConsumer($document);
+        $node->addApi($document);
     }
 
     /**
-     * test retrieve consumer
+     * test retrieve api
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::retrieveConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::retrieveApi
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrieveConsumer()
+    public function testRetrieveApi()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -144,24 +144,24 @@ class ConsumerTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/consumers/test-consumer?'),
+                $this->equalTo('/apis/test-api?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrieveConsumer('test-consumer');
+        $node->retrieveApi('test-api');
     }
 
     /**
-     * test list consumers
+     * test list apis
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::listConsumers
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::listApis
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListConsumers()
+    public function testListApis()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -175,75 +175,75 @@ class ConsumerTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/consumers/?'),
+                $this->equalTo('/apis/?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listConsumers();
+        $node->listApis();
     }
 
     /**
-     * test update consumer
+     * test update api
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::updateConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::updateApi
      * @covers \Unikorp\KongAdminApi\AbstractNode::patch
      */
-    public function testUpdateConsumer()
+    public function testUpdateApi()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
             ->method('getHttpClient')
             ->will($this->returnValue($this->httpClient));
+
+        // mock `response`
+        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
         $document = $this->createMock(Document::class);
-
-        // mock `response`
-        $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
             ->method('toJson')
             ->will($this->returnValue('{"test":true}'));
 
-        // stub `patch` method from `http client` mock
+        // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('/consumers/test-consumer'),
+                $this->equalTo('/apis/test-api'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateConsumer('test-consumer', $document);
+        $node->updateApi('test-api', $document);
     }
 
     /**
-     * test update or create consumer
+     * test update or create api
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::updateOrCreateConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::updateOrCreateApi
      * @covers \Unikorp\KongAdminApi\AbstractNode::put
      */
-    public function testUpdateOrCreateConsumer()
+    public function testUpdateOrCreateApi()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
             ->method('getHttpClient')
             ->will($this->returnValue($this->httpClient));
 
-        // mock `document`
-        $document = $this->createMock(Document::class);
-
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
+
+        // mock `document`
+        $document = $this->createMock(Document::class);
 
         // stub `set created at` method from `document` mock
         $document->expects($this->once())
@@ -255,29 +255,29 @@ class ConsumerTest extends TestCase
             ->method('toJson')
             ->will($this->returnValue('{"test":true}'));
 
-        // stub `put` method from `http client` mock
+        // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('put')
             ->with(
-                $this->equalTo('/consumers/'),
+                $this->equalTo('/apis/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateOrCreateConsumer($document);
+        $node->updateOrCreateApi($document);
     }
 
     /**
-     * test delete consumer
+     * test delete api
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::deleteConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ApiNode::deleteApi
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeleteConsumer()
+    public function testDeleteApi()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -287,17 +287,17 @@ class ConsumerTest extends TestCase
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
-        // stub `delete` method from `http client` mock
+        // stub `get` method from `http client` mock
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/consumers/test-consumer'),
+                $this->equalTo('/apis/test-api'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deleteConsumer('test-consumer');
+        $node->deleteApi('test-api');
     }
 }

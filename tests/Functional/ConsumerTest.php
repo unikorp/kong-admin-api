@@ -15,18 +15,18 @@ use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
-use Unikorp\KongAdminApi\Node\Consumer as Node;
+use Unikorp\KongAdminApi\Node\ConsumerNode as Node;
 
 /**
  * consumer test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class ConsumerTest extends TestCase
+class ConsumerNodeTest extends TestCase
 {
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Consumer $node
+     * @param \Unikorp\KongAdminApi\Node\ConsumerNode $node
      */
     private $node = null;
 
@@ -88,7 +88,7 @@ class ConsumerTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::createConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::createConsumer
      */
     public function testCreateConsumer()
     {
@@ -113,7 +113,7 @@ class ConsumerTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::retrieveConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::retrieveConsumer
      */
     public function testRetrieveConsumer()
     {
@@ -133,7 +133,7 @@ class ConsumerTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::listConsumers
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::listConsumers
      */
     public function testlistConsumers()
     {
@@ -168,7 +168,7 @@ class ConsumerTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::updateConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::updateConsumer
      */
     public function testUpdateConsumer()
     {
@@ -193,7 +193,7 @@ class ConsumerTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::updateOrCreateConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::updateOrCreateConsumer
      */
     public function testUpdateOrCreateConsumer()
     {
@@ -218,7 +218,7 @@ class ConsumerTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Consumer::deleteConsumer
+     * @covers \Unikorp\KongAdminApi\Node\ConsumerNode::deleteConsumer
      */
     public function testDeleteConsumer()
     {

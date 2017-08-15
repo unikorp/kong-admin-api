@@ -259,10 +259,14 @@ class ClientTest extends TestCase
      */
     public function validNodeNameProvider()
     {
-        yield ['api', '\Unikorp\KongAdminApi\Node\Api'];
-        yield ['cluster', '\Unikorp\KongAdminApi\Node\Cluster'];
-        yield ['consumer', '\Unikorp\KongAdminApi\Node\Consumer'];
-        yield ['information', '\Unikorp\KongAdminApi\Node\Information'];
-        yield ['plugin', '\Unikorp\KongAdminApi\Node\Plugin'];
+        yield ['api', '\Unikorp\KongAdminApi\Node\ApiNode'];
+        yield ['certificate', '\Unikorp\KongAdminApi\Node\CertificateNode'];
+        yield ['cluster', '\Unikorp\KongAdminApi\Node\ClusterNode'];
+        yield ['consumer', '\Unikorp\KongAdminApi\Node\ConsumerNode'];
+        yield ['information', '\Unikorp\KongAdminApi\Node\InformationNode'];
+        yield ['plugin', '\Unikorp\KongAdminApi\Node\PluginNode'];
+        yield ['sni', '\Unikorp\KongAdminApi\Node\SniNode'];
+        yield ['target', '\Unikorp\KongAdminApi\Node\TargetNode'];
+        yield ['upstream', '\Unikorp\KongAdminApi\Node\UpstreamNode'];
     }
 }

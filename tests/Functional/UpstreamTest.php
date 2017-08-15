@@ -15,18 +15,18 @@ use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\UpstreamDocument as Document;
-use Unikorp\KongAdminApi\Node\Upstream as Node;
+use Unikorp\KongAdminApi\Node\UpstreamNode as Node;
 
 /**
  * upstream test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class UpstreamTest extends TestCase
+class UpstreamNodeTest extends TestCase
 {
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Upstream $node
+     * @param \Unikorp\KongAdminApi\Node\UpstreamNode $node
      */
     private $node = null;
 
@@ -88,7 +88,7 @@ class UpstreamTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Upstream::addUpstream
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::addUpstream
      */
     public function testAddUpstream()
     {
@@ -113,7 +113,7 @@ class UpstreamTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Upstream::retrieveUpstream
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::retrieveUpstream
      */
     public function testRetrieveUpstream()
     {
@@ -133,7 +133,7 @@ class UpstreamTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Upstream::listUpstreams
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::listUpstreams
      */
     public function testListUpstreams()
     {
@@ -167,7 +167,7 @@ class UpstreamTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Upstream::updateUpstream
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::updateUpstream
      */
     public function testUpdateUpstream()
     {
@@ -192,7 +192,7 @@ class UpstreamTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Upstream::updateOrCreateUpstream
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::updateOrCreateUpstream
      */
     public function testUpdateOrCreateUpstream()
     {
@@ -217,7 +217,7 @@ class UpstreamTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Upstream::deleteUpstream
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::deleteUpstream
      */
     public function testDeleteUpstream()
     {

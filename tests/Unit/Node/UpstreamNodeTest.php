@@ -11,16 +11,16 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
-use Unikorp\KongAdminApi\Document\CertificateDocument as Document;
-use Unikorp\KongAdminApi\Node\Certificate as Node;
+use Unikorp\KongAdminApi\Document\UpstreamDocument as Document;
+use Unikorp\KongAdminApi\Node\UpstreamNode as Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * certificate test
+ * upstream node test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class CertificateTest extends TestCase
+class UpstreamNodeTest extends TestCase
 {
     /**
      * client
@@ -83,14 +83,14 @@ class CertificateTest extends TestCase
     }
 
     /**
-     * test add certificate
+     * test add upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::addCertificate
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::addUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::post
      */
-    public function testAddCertificate()
+    public function testAddUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -112,25 +112,25 @@ class CertificateTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('/certificates/'),
+                $this->equalTo('/upstreams/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->addCertificate($document);
+        $node->addUpstream($document);
     }
 
     /**
-     * test retrieve certificate
+     * test retrieve upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::retrieveCertificate
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::retrieveUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testRetrieveCertificate()
+    public function testRetrieveUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -144,24 +144,24 @@ class CertificateTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/certificates/test-certificate?'),
+                $this->equalTo('/upstreams/test-upstream?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->retrieveCertificate('test-certificate');
+        $node->retrieveUpstream('test-upstream');
     }
 
     /**
-     * test list certificates
+     * test list upstreams
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::listCertificates
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::listUpstreams
      * @covers \Unikorp\KongAdminApi\AbstractNode::get
      */
-    public function testListCertificates()
+    public function testListUpstreams()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -175,24 +175,24 @@ class CertificateTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('/certificates/?'),
+                $this->equalTo('/upstreams/?'),
                 $this->equalTo(['Content-Type' => 'application/x-www-form-urlencoded'])
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->listCertificates();
+        $node->listUpstreams();
     }
 
     /**
-     * test update certificate
+     * test update upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::updateCertificate
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::updateUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::patch
      */
-    public function testUpdateCertificate()
+    public function testUpdateUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -214,25 +214,25 @@ class CertificateTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('/certificates/test-certificate'),
+                $this->equalTo('/upstreams/test-upstream'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateCertificate('test-certificate', $document);
+        $node->updateUpstream('test-upstream', $document);
     }
 
     /**
-     * test update or create certificate
+     * test update or create upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::updateOrCreateCertificate
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::updateOrCreateUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::put
      */
-    public function testUpdateOrCreateCertificate()
+    public function testUpdateOrCreateUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -259,25 +259,25 @@ class CertificateTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('put')
             ->with(
-                $this->equalTo('/certificates/'),
+                $this->equalTo('/upstreams/'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('{"test":true}')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->updateOrCreateCertificate($document);
+        $node->updateOrCreateUpstream($document);
     }
 
     /**
-     * test delete certificate
+     * test delete upstream
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Certificate::deleteCertificate
+     * @covers \Unikorp\KongAdminApi\Node\UpstreamNode::deleteUpstream
      * @covers \Unikorp\KongAdminApi\AbstractNode::delete
      */
-    public function testDeleteCertificate()
+    public function testDeleteUpstream()
     {
         // stub `get http client` method from `client` mock
         $this->client->expects($this->once())
@@ -291,13 +291,13 @@ class CertificateTest extends TestCase
         $this->httpClient->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('/certificates/test-certificate'),
+                $this->equalTo('/upstreams/test-upstream'),
                 $this->equalTo(['Content-Type' => 'application/json']),
                 $this->equalTo('[]')
             )
             ->will($this->returnValue($response));
 
         $node = new Node($this->client);
-        $node->deleteCertificate('test-certificate');
+        $node->deleteUpstream('test-upstream');
     }
 }

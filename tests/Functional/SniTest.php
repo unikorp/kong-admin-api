@@ -16,14 +16,14 @@ use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
 use Unikorp\KongAdminApi\Document\CertificateDocument;
 use Unikorp\KongAdminApi\Document\SniDocument as Document;
-use Unikorp\KongAdminApi\Node\Sni as Node;
+use Unikorp\KongAdminApi\Node\SniNode as Node;
 
 /**
  * sni test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class SniTest extends TestCase
+class SniNodeTest extends TestCase
 {
     /**
      * client
@@ -33,7 +33,7 @@ class SniTest extends TestCase
 
     /**
      * node
-     * @param \Unikorp\KongAdminApi\Node\Sni $node
+     * @param \Unikorp\KongAdminApi\Node\SniNode $node
      */
     private $node = null;
 
@@ -104,7 +104,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::addSni
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::addSni
      */
     public function testAddSni()
     {
@@ -129,7 +129,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::retrieveSni
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::retrieveSni
      */
     public function testRetrieveSni()
     {
@@ -149,7 +149,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::listSnis
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::listSnis
      */
     public function testListSnis()
     {
@@ -174,7 +174,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::updateSni
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::updateSni
      */
     public function testUpdateSni()
     {
@@ -203,7 +203,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::updateOrCreateSni
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::updateOrCreateSni
      */
     public function testUpdateOrCreateSni()
     {
@@ -226,7 +226,7 @@ class SniTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Node\Sni::deleteSni
+     * @covers \Unikorp\KongAdminApi\Node\SniNode::deleteSni
      */
     public function testDeleteSni()
     {
