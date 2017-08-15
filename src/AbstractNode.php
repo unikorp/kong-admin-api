@@ -54,6 +54,7 @@ abstract class AbstractNode implements NodeInterface
      * get
      *
      * @param string $endpoint
+     * @param DocumentInterface $document
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
