@@ -230,7 +230,7 @@ class ClientTest extends TestCase
         $reflectionProperty->setAccessible(true);
 
         // add `plugin`
-        $client->addPlugin($plugin);
+        $this->assertSame($client, $client->addPlugin($plugin));
 
         // assert
         $this->assertContains($plugin, $reflectionProperty->getValue($client));
