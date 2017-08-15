@@ -14,8 +14,8 @@ namespace Unikorp\KongAdminApi\Tests\Functional;
 use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
-use Unikorp\KongAdminApi\Document\Api;
-use Unikorp\KongAdminApi\Document\Plugin as Document;
+use Unikorp\KongAdminApi\Document\ApiDocument;
+use Unikorp\KongAdminApi\Document\PluginDocument as Document;
 use Unikorp\KongAdminApi\Node\Plugin as Node;
 
 /**
@@ -60,7 +60,7 @@ class PluginTest extends TestCase
         $this->node = $this->client->getNode('plugin');
 
         // fixture: add api
-        $document = new Api();
+        $document = new ApiDocument();
         $document
             ->setName('TestApi')
             ->setHosts('test.api')

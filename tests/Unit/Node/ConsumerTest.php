@@ -11,6 +11,7 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
+use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
 use Unikorp\KongAdminApi\Node\Consumer as Node;
 use PHPUnit\Framework\TestCase;
 
@@ -97,7 +98,7 @@ class ConsumerTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Consumer');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -199,7 +200,7 @@ class ConsumerTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Consumer');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -239,7 +240,7 @@ class ConsumerTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Consumer');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');

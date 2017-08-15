@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Plugin as Document;
+use Unikorp\KongAdminApi\Document\PluginDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * plugin test
+ * plugin document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class PluginTest extends TestCase
+class PluginDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Plugin $document
+     * @var \Unikorp\KongAdminApi\Document\PluginDocument $document
      */
     private $document = null;
 
@@ -56,7 +56,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::setName
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::setName
      */
     public function testSetName()
     {
@@ -70,7 +70,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::getName
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::getName
      */
     public function testGetName()
     {
@@ -91,7 +91,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::setConsumerId
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::setConsumerId
      */
     public function testSetConsumerId()
     {
@@ -105,7 +105,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::getConsumerId
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::getConsumerId
      */
     public function testGetConsumerId()
     {
@@ -126,7 +126,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::addConfig
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::addConfig
      */
     public function testAddConfig()
     {
@@ -145,7 +145,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::addConfig
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::addConfig
      *
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Config for name `test` already set
@@ -163,7 +163,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::removeConfig
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::removeConfig
      */
     public function testRemoveConfig()
     {
@@ -189,7 +189,7 @@ class PluginTest extends TestCase
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::getConfig
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::getConfig
      */
     public function testGetConfig()
     {
@@ -318,8 +318,8 @@ class PluginTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::getFields
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
@@ -345,8 +345,8 @@ class PluginTest extends TestCase
      * @return void
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Plugin::getFields
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::toRequestParameters
+     * @covers \Unikorp\KongAdminApi\Document\PluginDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()

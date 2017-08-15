@@ -11,6 +11,7 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Node;
 
+use Unikorp\KongAdminApi\Document\ApiDocument as Document;
 use Unikorp\KongAdminApi\Node\Api as Node;
 use PHPUnit\Framework\TestCase;
 
@@ -97,7 +98,7 @@ class ApiTest extends TestCase
             ->will($this->returnValue($this->httpClient));
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Api');
+        $document = $this->createMock(Document::class);
 
         // mock `response`
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
@@ -202,7 +203,7 @@ class ApiTest extends TestCase
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Api');
+        $document = $this->createMock(Document::class);
 
         // stub `to json` method from `document` mock
         $document->expects($this->once())
@@ -242,7 +243,7 @@ class ApiTest extends TestCase
         $response = $this->createMock('\GuzzleHttp\Psr7\Response');
 
         // mock `document`
-        $document = $this->createMock('\Unikorp\KongAdminApi\Document\Api');
+        $document = $this->createMock(Document::class);
 
         // stub `set created at` method from `document` mock
         $document->expects($this->once())

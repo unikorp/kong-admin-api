@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Certificate as Document;
+use Unikorp\KongAdminApi\Document\SniDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * certificate test
+ * sni document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class CertificateTest extends TestCase
+class SniDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Certificate $document
+     * @var \Unikorp\KongAdminApi\Document\SniDocument $document
      */
     private $document = null;
 
@@ -52,108 +52,73 @@ class CertificateTest extends TestCase
     }
 
     /**
-     * test set cert
+     * test set name
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::setCert
+     * @covers \Unikorp\KongAdminApi\Document\SniDocument::setName
      */
-    public function testSetCert()
+    public function testSetName()
     {
         // asserts
-        $this->document->setCert('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'cert'));
+        $this->document->setName('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'name'));
     }
 
     /**
-     * test get cert
+     * test get name
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::getCert
+     * @covers \Unikorp\KongAdminApi\Document\SniDocument::getName
      */
-    public function testGetCert()
+    public function testGetName()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `cert` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('cert');
+        // set `name` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('name');
         $reflectionProperty->setAccessible(true);
 
         // assert
         $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getCert());
+        $this->assertSame('test', $this->document->getName());
     }
 
     /**
-     * test set key
+     * test set ssl certificate id
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::setKey
+     * @covers \Unikorp\KongAdminApi\Document\SniDocument::setSslCertificateId
      */
-    public function testSetKey()
+    public function testSetSslCertificateId()
     {
         // asserts
-        $this->document->setKey('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'key'));
+        $this->document->setSslCertificateId('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'sslCertificateId'));
     }
 
     /**
-     * test get key
+     * test get ssl certificate id
      *
      * @return void
      *
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::getKey
+     * @covers \Unikorp\KongAdminApi\Document\SniDocument::getSslCertificateId
      */
-    public function testGetKey()
+    public function testGetSslCertificateId()
     {
         // reflect `document`
         $reflectionClass = new \ReflectionClass($this->document);
 
-        // set `key` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('key');
+        // set `sslCertificateId` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('sslCertificateId');
         $reflectionProperty->setAccessible(true);
 
         // assert
         $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getKey());
-    }
-
-    /**
-     * test set snis
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::setSnis
-     */
-    public function testSetSnis()
-    {
-        // asserts
-        $this->document->setSnis('test');
-        $this->assertSame('test', $this->readAttribute($this->document, 'snis'));
-    }
-
-    /**
-     * test get snis
-     *
-     * @return void
-     *
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::getSnis
-     */
-    public function testGetSnis()
-    {
-        // reflect `document`
-        $reflectionClass = new \ReflectionClass($this->document);
-
-        // set `snis` property from `document` accessible
-        $reflectionProperty = $reflectionClass->getProperty('snis');
-        $reflectionProperty->setAccessible(true);
-
-        // assert
-        $reflectionProperty->setValue($this->document, 'test');
-        $this->assertSame('test', $this->document->getSnis());
+        $this->assertSame('test', $this->document->getSslCertificateId());
     }
 
     /**
@@ -269,21 +234,20 @@ class CertificateTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::getFields
+     * @covers \Unikorp\KongAdminApi\Document\SniDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
     {
         $this->document
-            ->setCert('cert')
-            ->setKey('key')
-            ->setSnis('snis')
+            ->setName('name')
+            ->setSslCertificateId('sslCertificateId')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            '{"cert":"cert","key":"key","snis":"snis","created_at":42,"size":50,"offset":"offset"}',
+            '{"name":"name","ssl_certificate_id":"sslCertificateId","created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -295,21 +259,20 @@ class CertificateTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Certificate::getFields
+     * @covers \Unikorp\KongAdminApi\Document\SniDocument::getFields
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()
     {
         $this->document
-            ->setCert('cert')
-            ->setKey('key')
-            ->setSnis('snis')
+            ->setName('name')
+            ->setSslCertificateId('sslCertificateId')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            'cert=cert&key=key&snis=snis&created_at=42&size=50&offset=offset',
+            'name=name&ssl_certificate_id=sslCertificateId&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }

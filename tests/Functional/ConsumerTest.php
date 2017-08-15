@@ -14,7 +14,7 @@ namespace Unikorp\KongAdminApi\Tests\Functional;
 use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
-use Unikorp\KongAdminApi\Document\Consumer as Document;
+use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
 use Unikorp\KongAdminApi\Node\Consumer as Node;
 
 /**

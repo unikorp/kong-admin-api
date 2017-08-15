@@ -14,8 +14,8 @@ namespace Unikorp\KongAdminApi\Tests\Functional;
 use PHPUnit\Framework\TestCase;
 use Unikorp\KongAdminApi\Client;
 use Unikorp\KongAdminApi\Configurator;
-use Unikorp\KongAdminApi\Document\Target as Document;
-use Unikorp\KongAdminApi\Document\Upstream;
+use Unikorp\KongAdminApi\Document\TargetDocument as Document;
+use Unikorp\KongAdminApi\Document\UpstreamDocument;
 use Unikorp\KongAdminApi\Node\Target as Node;
 
 /**
@@ -60,7 +60,7 @@ class TargetTest extends TestCase
         $this->node = $this->client->getNode('target');
 
         // fixture: add upstream
-        $document = new Upstream();
+        $document = new UpstreamDocument();
         $document
             ->setName('TestUpstream');
         $this->client->getNode('upstream')->addUpstream($document);

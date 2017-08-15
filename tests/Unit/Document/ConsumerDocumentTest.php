@@ -11,19 +11,19 @@
 
 namespace Unikorp\KongAdminApi\Tests\Unit\Document;
 
-use Unikorp\KongAdminApi\Document\Information as Document;
+use Unikorp\KongAdminApi\Document\ConsumerDocument as Document;
 use PHPUnit\Framework\TestCase;
 
 /**
- * information test
+ * consumer document test
  *
  * @author VEBER Arnaud <https://github.com/VEBERArnaud>
  */
-class InformationTest extends TestCase
+class ConsumerDocumentTest extends TestCase
 {
     /**
      * document
-     * @var \Unikorp\KongAdminApi\Document\Information $document
+     * @var \Unikorp\KongAdminApi\Document\ConsumerDocument $document
      */
     private $document = null;
 
@@ -49,6 +49,83 @@ class InformationTest extends TestCase
     protected function tearDown()
     {
         $this->document = null;
+    }
+
+    /**
+     * test set username
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\ConsumerDocument::setUsername
+     */
+    public function testSetUsername()
+    {
+        // asserts
+        $this->document->setUsername('test');
+        $this->assertSame('test', $this->readAttribute($this->document, 'username'));
+    }
+
+    /**
+     * test get username
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\ConsumerDocument::getUsername
+     */
+    public function testGetUsername()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `username` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('username');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 'test');
+        $this->assertSame('test', $this->document->getUsername());
+    }
+
+    /**
+     * test set custom id
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\ConsumerDocument::setCustomId
+     */
+    public function testCustomId()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `custom id` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('customId');
+        $reflectionProperty->setAccessible(true);
+
+        // asserts
+        $this->document->setCustomId('test');
+        $this->assertSame('test', $reflectionProperty->getValue($this->document));
+    }
+
+    /**
+     * test get custom id
+     *
+     * @return void
+     *
+     * @covers \Unikorp\KongAdminApi\Document\ConsumerDocument::getCustomId
+     */
+    public function testGetCustomId()
+    {
+        // reflect `document`
+        $reflectionClass = new \ReflectionClass($this->document);
+
+        // set `custom id` property from `document` accessible
+        $reflectionProperty = $reflectionClass->getProperty('customId');
+        $reflectionProperty->setAccessible(true);
+
+        // assert
+        $reflectionProperty->setValue($this->document, 'test');
+        $this->assertSame('test', $this->document->getCustomId());
     }
 
     /**
@@ -164,17 +241,20 @@ class InformationTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toJson
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Information::getFields
+     * @covers \Unikorp\KongAdminApi\Document\ConsumerDocument::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToJson()
     {
         $this->document
+            ->setUsername('username')
+            ->setCustomId('customId')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            '{"created_at":42,"size":50,"offset":"offset"}',
+            '{"username":"username","custom_id":"customId","created_at":42,"size":50,"offset":"offset"}',
             $this->document->toJson()
         );
     }
@@ -186,17 +266,20 @@ class InformationTest extends TestCase
      *
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toQueryString
      * @covers \Unikorp\KongAdminApi\AbstractDocument::toRequestParameters
-     * @covers \Unikorp\KongAdminApi\Document\Information::getFields
+     * @covers \Unikorp\KongAdminApi\Document\ConsumerDocument::getFields
+     * @covers \Unikorp\KongAdminApi\AbstractDocument::toSnakeCase
      */
     public function testToQueryString()
     {
         $this->document
+            ->setUsername('username')
+            ->setCustomId('customId')
             ->setCreatedAt(42)
             ->setSize(50)
             ->setOffset('offset');
 
         $this->assertSame(
-            'created_at=42&size=50&offset=offset',
+            'username=username&custom_id=customId&created_at=42&size=50&offset=offset',
             $this->document->toQueryString()
         );
     }
