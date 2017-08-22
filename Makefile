@@ -20,7 +20,9 @@ test: ## Test
 	$(info --> Execute all tests)
 	@docker-compose -f tests/Functional/docker-compose.yml down &>/dev/null
 	@docker-compose -f tests/Functional/docker-compose.yml up -d --scale kong=2 &>/dev/null
-	@sleep 20
+	@sleep 5
+	@docker run --rm --env "KONG_DATABASE=postgres" --env "KONG_PG_HOST=functional_db_1" --link "functional_db_1" --network "functional_default" kong:0.11 kong migrations up &>/dev/null
+	@sleep 15
 	@./vendor/bin/phpunit
 	@docker-compose -f tests/Functional/docker-compose.yml down &>/dev/null
 
@@ -32,6 +34,8 @@ test-functional: ## Functional test
 	$(info --> Execute functional tests)
 	@docker-compose -f tests/Functional/docker-compose.yml down &>/dev/null
 	@docker-compose -f tests/Functional/docker-compose.yml up -d --scale kong=2 &>/dev/null
-	@sleep 20
+	@sleep 5
+	@docker run --rm --env "KONG_DATABASE=postgres" --env "KONG_PG_HOST=functional_db_1" --link "functional_db_1" --network "functional_default" kong:0.11 kong migrations up &>/dev/null
+	@sleep 15
 	@./vendor/bin/phpunit tests/Functional
 	@docker-compose -f tests/Functional/docker-compose.yml down &>/dev/null
