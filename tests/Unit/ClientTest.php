@@ -261,7 +261,6 @@ class ClientTest extends TestCase
     {
         yield ['api', '\Unikorp\KongAdminApi\Node\ApiNode'];
         yield ['certificate', '\Unikorp\KongAdminApi\Node\CertificateNode'];
-        yield ['cluster', '\Unikorp\KongAdminApi\Node\ClusterNode'];
         yield ['consumer', '\Unikorp\KongAdminApi\Node\ConsumerNode'];
         yield ['information', '\Unikorp\KongAdminApi\Node\InformationNode'];
         yield ['plugin', '\Unikorp\KongAdminApi\Node\PluginNode'];
