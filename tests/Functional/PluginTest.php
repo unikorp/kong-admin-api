@@ -345,38 +345,7 @@ class PluginNodeTest extends TestCase
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('OK', $response->getReasonPhrase());
-        $this->assertArraySubset([
-            'enabled_plugins' => [
-                'syslog',
-                'ldap-auth',
-                'rate-limiting',
-                'correlation-id',
-                'jwt',
-                'request-termination',
-                'runscope',
-                'request-transformer',
-                'http-log',
-                'loggly',
-                'response-transformer',
-                'basic-auth',
-                'tcp-log',
-                'hmac-auth',
-                'oauth2',
-                'acl',
-                'bot-detection',
-                'udp-log',
-                'cors',
-                'file-log',
-                'ip-restriction',
-                'datadog',
-                'request-size-limiting',
-                'galileo',
-                'aws-lambda',
-                'statsd',
-                'response-ratelimiting',
-                'key-auth',
-            ],
-        ], $data);
+        $this->assertArrayHasKey('enabled_plugins', $data);
     }
 
     /**
