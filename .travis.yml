@@ -20,7 +20,9 @@ install:
 
 before_script:
     - docker-compose -f tests/Functional/docker-compose.yml up -d --scale kong=2
-    - sleep 30 # give postgresql the time to start
+    - sleep 5 # give postgresql some time to be ready before kong migration
+    - docker run --rm --env "KONG_DATABASE=postgres" --env "KONG_PG_HOST=functional_db_1" --link "functional_db_1" --network "functional_default" kong:0.11 kong migrations up &>/dev/null
+    - sleep 15 # give kong containers some time to join the cluster
 
 script:
     - ./vendor/bin/phpunit

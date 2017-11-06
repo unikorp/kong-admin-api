@@ -46,7 +46,6 @@ class Configurator implements ConfiguratorInterface
         $this->nodes = [
             'api' => Node\ApiNode::class,
             'certificate' => Node\CertificateNode::class,
-            'cluster' => Node\ClusterNode::class,
             'consumer' => Node\ConsumerNode::class,
             'information' => Node\InformationNode::class,
             'plugin' => Node\PluginNode::class,
