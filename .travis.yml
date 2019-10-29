@@ -20,7 +20,7 @@ install:
 
 before_script:
     - docker-compose -f tests/Functional/docker-compose.yml up -d --scale kong=2
-    - sleep 30 # give postgresql the time to start
+    - sleep 90 # give postgresql the time to start
 
 script:
     - ./vendor/bin/phpunit
